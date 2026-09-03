@@ -1,5 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import About from '../components/About.astro';
+import Contact from '../components/Contact.astro';
+import Expertise from '../components/Expertise.astro';
+import ExperienceTimeline from '../components/ExperienceTimeline.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import ProjectShowcase from '../components/ProjectShowcase.astro';
+import { expertiseAreas, experienceItems, projects } from '../data/portfolio';
 
 const title = 'Maurycy Pytel | Data, Software & Web Development';
 const description = 'Portfolio of Maurycy Pytel - web development, Python automation, data, e-commerce and digital projects.';
@@ -7,7 +16,53 @@ const canonical = 'https://isentor.github.io/';
 ---
 
 <BaseLayout {title} {description} {canonical}>
+  <Header />
   <main id="main-content">
-    <h1>Maurycy Pytel</h1>
+    <Hero />
+
+    <section id="projects" class="projects light-section section-shell">
+      <div class="container">
+        <div class="section-heading projects-heading" data-reveal>
+          <span class="micro-label">SELECTED WORK</span>
+          <h2>Selected Projects</h2>
+          <p>A selection of public and private work spanning web platforms, automation and practical digital systems.</p>
+        </div>
+
+        <div class="project-list">
+          {projects.map((project, index) => <ProjectShowcase {project} {index} />)}
+        </div>
+      </div>
+    </section>
+
+    <Expertise areas={expertiseAreas} />
+    <ExperienceTimeline items={experienceItems} />
+    <About />
+    <Contact />
   </main>
+  <Footer />
 </BaseLayout>
+
+<script>
+  const revealElements = document.querySelectorAll<HTMLElement>('[data-reveal]');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.documentElement.classList.add('has-js');
+
+  if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -8% 0px', threshold: 0.12 },
+    );
+
+    revealElements.forEach((element) => observer.observe(element));
+  } else {
+    revealElements.forEach((element) => element.classList.add('is-visible'));
+  }
+</script>

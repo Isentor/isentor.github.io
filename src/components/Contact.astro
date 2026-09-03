@@ -1,0 +1,27 @@
+---
+import { externalLinks } from '../data/portfolio';
+---
+
+<section id="contact" class="contact dark-section section-shell">
+  <div class="container contact-layout" data-reveal>
+    <div>
+      <span class="micro-label">CONTACT</span>
+      <h2>Let's build something useful.</h2>
+      <p>I'm open to conversations about technical roles, digital projects and practical collaborations.</p>
+    </div>
+    <div class="contact-links">
+      <a href={externalLinks.emailHref}>
+        <span>Email</span>
+        <strong>{externalLinks.email}</strong>
+      </a>
+      <a href={externalLinks.github} target="_blank" rel="noreferrer">
+        <span>Profile</span>
+        <strong>GitHub</strong>
+      </a>
+      <a href={externalLinks.linkedin} target="_blank" rel="noreferrer">
+        <span>Profile</span>
+        <strong>LinkedIn</strong>
+      </a>
+    </div>
+  </div>
+</section>

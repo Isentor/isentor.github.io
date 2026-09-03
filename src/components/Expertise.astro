@@ -1,0 +1,32 @@
+---
+import type { ExpertiseArea } from '../data/portfolio';
+
+interface Props {
+  areas: ExpertiseArea[];
+}
+
+const { areas } = Astro.props;
+---
+
+<section id="expertise" class="expertise dark-section section-shell">
+  <div class="container">
+    <div class="section-heading section-heading-dark" data-reveal>
+      <span class="micro-label">EXPERTISE</span>
+      <h2>What I Do</h2>
+      <p>Focused capabilities shaped by practical work across software, websites, data and digital operations.</p>
+    </div>
+
+    <div class="expertise-grid">
+      {areas.map((area, index) => (
+        <article class="expertise-item" data-reveal>
+          <span class="expertise-number">{String(index + 1).padStart(2, '0')}</span>
+          <h3>{area.title}</h3>
+          <p>{area.summary}</p>
+          <ul>
+            {area.skills.map((skill) => <li>{skill}</li>)}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,24 @@
+---
+import { externalLinks } from '../data/portfolio';
+import HeroShowcase from './HeroShowcase.astro';
+---
+
+<section id="top" class="hero dark-section">
+  <div class="container hero-grid">
+    <div class="hero-copy" data-reveal>
+      <span class="micro-label">PORTFOLIO / 2026</span>
+      <h1>Maurycy Pytel</h1>
+      <p class="hero-descriptor">Data, Software & Web Development</p>
+      <p class="hero-lead">I build practical projects combining web development, automation, data and digital platforms.</p>
+      <p class="hero-support">My current work includes Python-based automation systems and production websites, while my background spans e-commerce, WordPress, web analytics, SEO, digital content and real operational workflows.</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="#projects">View projects</a>
+        <a class="button button-secondary" href={externalLinks.github} target="_blank" rel="noreferrer">GitHub</a>
+      </div>
+    </div>
+
+    <div class="hero-visual" data-reveal>
+      <HeroShowcase />
+    </div>
+  </div>
+</section>

@@ -1,0 +1,74 @@
+---
+import { externalLinks } from '../data/portfolio';
+
+const sectionLinks = [
+  { label: 'Projects', href: '#projects' },
+  { label: 'Expertise', href: '#expertise' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'About', href: '#about' },
+  { label: 'Contact', href: '#contact' },
+];
+---
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header" data-site-header>
+  <div class="container nav-shell">
+    <a class="brand" href="#top" aria-label="Maurycy Pytel - back to top">Maurycy Pytel</a>
+
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="primary-navigation"
+      aria-label="Open navigation"
+      hidden
+      data-nav-toggle
+    >
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav id="primary-navigation" class="primary-navigation" aria-label="Primary navigation" data-primary-navigation>
+      <div class="section-navigation">
+        {sectionLinks.map((link) => <a href={link.href}>{link.label}</a>)}
+      </div>
+      <div class="profile-navigation">
+        <a href={externalLinks.github} target="_blank" rel="noreferrer">GitHub</a>
+        <a href={externalLinks.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-site-header]');
+  const toggle = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');
+  const navigation = document.querySelector<HTMLElement>('[data-primary-navigation]');
+
+  if (header && toggle && navigation) {
+    toggle.hidden = false;
+    header.dataset.menuReady = 'true';
+
+    const setMenuState = (open: boolean) => {
+      header.dataset.menuOpen = String(open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+    };
+
+    toggle.addEventListener('click', () => {
+      setMenuState(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    navigation.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setMenuState(false));
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        setMenuState(false);
+        toggle.focus();
+      }
+    });
+  }
+</script>
