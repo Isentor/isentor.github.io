@@ -9,6 +9,15 @@ interface Props {
 const { project, index } = Astro.props;
 const isReversed = index % 2 === 1;
 const number = String(index + 1).padStart(2, '0');
+const image =
+  project.image && project.imageAlt && project.imageWidth && project.imageHeight
+    ? {
+        src: project.image,
+        alt: project.imageAlt,
+        width: project.imageWidth,
+        height: project.imageHeight,
+      }
+    : undefined;
 ---
 
 <article class:list={['project-showcase', { 'project-showcase-reversed': isReversed }]} data-reveal>
@@ -23,26 +32,54 @@ const number = String(index + 1).padStart(2, '0');
     <ul class="technology-list" aria-label={`${project.name} technologies`}>
       {project.technologies.map((technology) => <li>{technology}</li>)}
     </ul>
-    <span class="coming-soon">Case study coming soon</span>
+    <div class="project-actions">
+      {
+        project.liveUrl && project.liveLabel && (
+          <a class="project-live-link" href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+            {project.liveLabel}
+          </a>
+        )
+      }
+      <span class="coming-soon">Case study coming soon</span>
+    </div>
   </div>
 
-  <div class:list={['project-visual', `project-visual-${project.visualType}`]} aria-hidden="true">
+  <div
+    class:list={['project-visual', `project-visual-${project.visualType}`]}
+    aria-hidden={image ? undefined : 'true'}
+  >
     <div class="browser-frame">
-      <div class="browser-bar"><span></span><span></span><span></span><i></i></div>
-      <div class="browser-body">
-        <span class="visual-label">{project.category}</span>
-        <strong>{project.name}</strong>
+      <div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span><i></i></div>
+      <div class:list={['browser-body', { 'browser-body-image': image }]}>
         {
-          project.visualType === 'automation' ? (
-            <div class="workflow-map">
-              <span>Prepare</span><i></i><span>Validate</span><i></i><span>Schedule</span>
-            </div>
+          image ? (
+            <img
+              class="project-screenshot"
+              src={image.src}
+              alt={image.alt}
+              width={image.width}
+              height={image.height}
+              loading="lazy"
+              decoding="async"
+            />
+          ) : project.visualType === 'automation' ? (
+            <>
+              <span class="visual-label">{project.category}</span>
+              <strong>{project.name}</strong>
+              <div class="workflow-map">
+                <span>Prepare</span><i></i><span>Validate</span><i></i><span>Schedule</span>
+              </div>
+            </>
           ) : (
-            <div class="site-blueprint">
-              <span></span>
-              <div><i></i><i></i><i></i></div>
-              <span></span>
-            </div>
+            <>
+              <span class="visual-label">{project.category}</span>
+              <strong>{project.name}</strong>
+              <div class="site-blueprint">
+                <span></span>
+                <div><i></i><i></i><i></i></div>
+                <span></span>
+              </div>
+            </>
           )
         }
       </div>

@@ -12,6 +12,12 @@ export interface Project {
   details?: string;
   technologies: string[];
   visualType: 'web' | 'architecture' | 'automation';
+  image?: string;
+  imageAlt?: string;
+  imageWidth?: number;
+  imageHeight?: number;
+  liveUrl?: string;
+  liveLabel?: string;
 }
 
 export const projects: Project[] = [
@@ -19,9 +25,17 @@ export const projects: Project[] = [
     name: 'Tawerna Gothic',
     category: 'WEB PLATFORM',
     description:
-      'A content-driven gaming platform developed and maintained on WordPress, combining publishing workflows, information architecture and ongoing technical development.',
+      'A long-running Polish gaming platform focused on the Gothic series, combining an extensive content archive with current news, guides and editorial coverage.',
+    details:
+      'I develop and maintain the WordPress-based platform, working across its technical implementation, content architecture, publishing workflows and integration with the broader Tawerna Gothic ecosystem.',
     technologies: ['WordPress', 'PHP', 'MySQL', 'Content Architecture'],
     visualType: 'web',
+    image: '/projects/tawerna-gothic/homepage-desktop.webp',
+    imageAlt: 'Screenshot of the Tawerna Gothic homepage',
+    imageWidth: 1440,
+    imageHeight: 900,
+    liveUrl: 'https://tawerna-gothic.pl',
+    liveLabel: 'Visit live site',
   },
   {
     name: 'Grytycy.pl',
