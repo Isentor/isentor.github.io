@@ -11,6 +11,7 @@
   --muted-light: #aaa398;
   --accent: #c49a58;
   --accent-dark: #9a7137;
+  --accent-text: #7d5728;
   --line-dark: rgba(241, 237, 229, 0.15);
   --line-light: rgba(24, 25, 21, 0.16);
   --sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -123,6 +124,11 @@ ol {
   height: 1px;
   background: currentColor;
   content: '';
+}
+
+.light-section .micro-label,
+.showcase-panel-automation .micro-label {
+  color: var(--accent-text);
 }
 
 .skip-link {
@@ -923,7 +929,7 @@ ol {
 }
 
 .timeline-period {
-  color: var(--accent-dark);
+  color: var(--accent-text);
   font-family: var(--mono);
   font-size: 0.72rem;
   font-weight: 700;
@@ -1062,7 +1068,7 @@ ol {
 }
 
 .footer-inner p span {
-  color: #73736d;
+  color: #85857e;
 }
 
 .footer-inner a {

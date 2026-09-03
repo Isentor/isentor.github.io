@@ -45,6 +45,7 @@ assert.equal(headingCount, 1, 'generated homepage must contain exactly one h1');
 assert.doesNotMatch(html, /href="(?:\s*|#)"/, 'generated homepage must not contain empty links');
 assert.doesNotMatch(html, /href="\/projects\//, 'case study routes must not be linked in V0.1');
 assert.doesNotMatch(html, /[\u2013\u2014]/, 'generated HTML must use only ASCII hyphens');
+assert.match(html, /class="hero-showcase" aria-hidden="true"/, 'decorative hero showcase must be hidden from assistive technology');
 
 const localAnchors = [...html.matchAll(/href="#([^"]+)"/g)].map((match) => match[1]);
 for (const anchor of localAnchors) {
