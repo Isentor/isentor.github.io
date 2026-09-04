@@ -1,0 +1,19 @@
+---
+import type { CaseStudyMetric } from '../../data/tawernaGothicCaseStudy';
+
+interface Props {
+  metrics: CaseStudyMetric[];
+  compact?: boolean;
+}
+
+const { metrics, compact = false } = Astro.props;
+---
+
+<dl class:list={['cs-metrics', { 'cs-metrics-compact': compact }]}>
+  {metrics.map((metric) => (
+    <div>
+      <dt>{metric.value}</dt>
+      <dd>{metric.label}</dd>
+    </div>
+  ))}
+</dl>

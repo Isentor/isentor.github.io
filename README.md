@@ -6,7 +6,12 @@ Live site: [isentor.github.io](https://isentor.github.io)
 
 ## Status
 
-Homepage prototype V0.1
+Homepage and first full project case study.
+
+Routes:
+
+- `/`
+- `/projects/tawerna-gothic/`
 
 ## Stack
 
@@ -38,7 +43,7 @@ npm run build
 npm run verify
 ```
 
-The verification script checks the generated homepage structure, required content and links, metadata, route scope, and reduced motion support.
+The verification script checks the generated homepage and Tawerna Gothic case study structure, required content and links, metadata, route scope, and reduced motion support.
 
 ## Production build
 

@@ -1,12 +1,14 @@
 ---
 import { externalLinks } from '../data/portfolio';
 
+const isHomepage = Astro.url.pathname === '/';
+const sectionPrefix = isHomepage ? '' : '/';
 const sectionLinks = [
-  { label: 'Projects', href: '#projects' },
-  { label: 'Expertise', href: '#expertise' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'About', href: '#about' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Projects', href: `${sectionPrefix}#projects` },
+  { label: 'Expertise', href: `${sectionPrefix}#expertise` },
+  { label: 'Experience', href: `${sectionPrefix}#experience` },
+  { label: 'About', href: `${sectionPrefix}#about` },
+  { label: 'Contact', href: `${sectionPrefix}#contact` },
 ];
 ---
 
@@ -14,7 +16,7 @@ const sectionLinks = [
 
 <header class="site-header" data-site-header>
   <div class="container nav-shell">
-    <a class="brand" href="#top" aria-label="Maurycy Pytel - back to top">Maurycy Pytel</a>
+    <a class="brand" href={isHomepage ? '#top' : '/'} aria-label={isHomepage ? 'Maurycy Pytel - back to top' : 'Maurycy Pytel - homepage'}>Maurycy Pytel</a>
 
     <button
       class="nav-toggle"
@@ -34,8 +36,8 @@ const sectionLinks = [
         {sectionLinks.map((link) => <a href={link.href}>{link.label}</a>)}
       </div>
       <div class="profile-navigation">
-        <a href={externalLinks.github} target="_blank" rel="noreferrer">GitHub</a>
-        <a href={externalLinks.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href={externalLinks.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href={externalLinks.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </div>
     </nav>
   </div>

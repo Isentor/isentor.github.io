@@ -18,6 +18,8 @@ export interface Project {
   imageHeight?: number;
   liveUrl?: string;
   liveLabel?: string;
+  caseStudyUrl?: string;
+  caseStudyLabel?: string;
 }
 
 export const projects: Project[] = [
@@ -36,6 +38,8 @@ export const projects: Project[] = [
     imageHeight: 900,
     liveUrl: 'https://tawerna-gothic.pl',
     liveLabel: 'Visit live site',
+    caseStudyUrl: '/projects/tawerna-gothic/',
+    caseStudyLabel: 'View case study',
   },
   {
     name: 'Grytycy.pl',

@@ -1,0 +1,36 @@
+---
+interface Roles {
+  human: string[];
+  ai: string[];
+}
+
+interface Props {
+  stages: string[];
+  roles: Roles;
+}
+
+const { stages, roles } = Astro.props;
+---
+
+<div class="cs-workflow" role="group" aria-label="AI-assisted development workflow">
+  <ol class="cs-workflow-stages">
+    {stages.map((stage, index) => (
+      <li>
+        <span>{String(index + 1).padStart(2, '0')}</span>
+        <strong>{stage}</strong>
+      </li>
+    ))}
+  </ol>
+  <div class="cs-workflow-roles">
+    <article>
+      <span class="cs-diagram-label">OWNERSHIP</span>
+      <h3>Human-owned</h3>
+      <ul>{roles.human.map((item) => <li>{item}</li>)}</ul>
+    </article>
+    <article>
+      <span class="cs-diagram-label">ACCELERATION</span>
+      <h3>AI-assisted</h3>
+      <ul>{roles.ai.map((item) => <li>{item}</li>)}</ul>
+    </article>
+  </div>
+</div>

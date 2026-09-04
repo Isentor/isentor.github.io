@@ -1,0 +1,255 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Footer from '../../../components/Footer.astro';
+import Header from '../../../components/Header.astro';
+import CaseStudyGallery from '../../../components/case-study/CaseStudyGallery.astro';
+import CaseStudyHero from '../../../components/case-study/CaseStudyHero.astro';
+import CaseStudyMetrics from '../../../components/case-study/CaseStudyMetrics.astro';
+import CaseStudyTimeline from '../../../components/case-study/CaseStudyTimeline.astro';
+import DevelopmentWorkflow from '../../../components/case-study/DevelopmentWorkflow.astro';
+import InformationArchitecture from '../../../components/case-study/InformationArchitecture.astro';
+import PlatformArchitecture from '../../../components/case-study/PlatformArchitecture.astro';
+import {
+  caseStudySeo,
+  challenges,
+  galleryItems,
+  hero,
+  informationArchitecture,
+  lessons,
+  migrationMetrics,
+  overviewCopy,
+  performanceFeatures,
+  performanceMetrics,
+  platformArchitecture,
+  platformFeatures,
+  reusableFoundation,
+  roleCopy,
+  seoFeatures,
+  timeline,
+  validationAreas,
+  validationMetrics,
+  workflowRoles,
+  workflowStages,
+} from '../../../data/tawernaGothicCaseStudy';
+import '../../../styles/case-study.css';
+---
+
+<BaseLayout title={caseStudySeo.title} description={caseStudySeo.description} canonical={caseStudySeo.canonical}>
+  <Header />
+  <main id="main-content" class="case-study-page">
+    <CaseStudyHero {hero} />
+
+    <section class="cs-section cs-overview light-section" aria-label="Project overview and role">
+      <div class="container cs-two-column">
+        <article>
+          <span class="micro-label">THE PLATFORM</span>
+          <h2>Overview</h2>
+          {overviewCopy.map((paragraph) => <p>{paragraph}</p>)}
+        </article>
+        <article>
+          <span class="micro-label">OWNERSHIP</span>
+          <h2>My Role</h2>
+          {roleCopy.map((paragraph) => <p>{paragraph}</p>)}
+        </article>
+      </div>
+    </section>
+
+    <CaseStudyTimeline entries={timeline} />
+
+    <section class="cs-section light-section" aria-labelledby="migration-heading">
+      <div class="container">
+        <div class="cs-section-heading">
+          <span class="micro-label">CONTROLLED MIGRATION</span>
+          <h2 id="migration-heading">Migration Without Losing the Archive</h2>
+          <p>The migration process treated the archive as a data integrity problem rather than a simple import operation.</p>
+        </div>
+        <CaseStudyMetrics metrics={migrationMetrics} />
+        <div class="cs-supporting-copy">
+          <p>The process used snapshots, staged validation and post-migration comparison to verify the resulting state.</p>
+          <p>The final integrity audit found no missing migrated posts and no detected differences in the compared content.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section cs-section-neutral light-section" aria-labelledby="information-architecture-heading">
+      <div class="container">
+        <div class="cs-section-heading">
+          <span class="micro-label">CONTENT MODEL</span>
+          <h2 id="information-architecture-heading">Information Architecture</h2>
+          <p>One of the most important changes was separating two different concepts that are difficult to represent with a conventional category tree.</p>
+        </div>
+        <InformationArchitecture architecture={informationArchitecture} />
+        <div class="cs-supporting-copy">
+          <p>A custom hierarchical WordPress taxonomy supports the second dimension.</p>
+          <p>This allows a single article to remain associated with its game or topic while also appearing inside the appropriate functional section, without duplicating the content itself.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section cs-section-dark dark-section" aria-labelledby="wordpress-platform-heading">
+      <div class="container cs-platform-layout">
+        <div class="cs-section-heading cs-section-heading-dark">
+          <span class="micro-label">IMPLEMENTATION</span>
+          <h2 id="wordpress-platform-heading">Custom WordPress Platform</h2>
+          <p>The current implementation uses WordPress with ColorMag as a parent theme and a dedicated Tawerna Gothic child theme.</p>
+        </div>
+        <ul class="cs-editorial-list cs-editorial-list-dark">
+          {platformFeatures.map((feature) => <li>{feature}</li>)}
+        </ul>
+        <div class="cs-supporting-copy cs-supporting-copy-dark">
+          <p>The homepage is deliberately structured as an editorial composition rather than a simple chronological WordPress feed.</p>
+          <p>This provides stronger control over hierarchy and helps direct users toward the most useful or relevant content.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section cs-section-dark cs-architecture-section dark-section" aria-labelledby="platform-architecture-heading">
+      <div class="container">
+        <div class="cs-section-heading cs-section-heading-dark">
+          <span class="micro-label">SYSTEM VIEW</span>
+          <h2 id="platform-architecture-heading">Platform Architecture</h2>
+        </div>
+        <PlatformArchitecture architecture={platformArchitecture} />
+      </div>
+    </section>
+
+    <section class="cs-section light-section" aria-labelledby="challenges-heading">
+      <div class="container">
+        <div class="cs-section-heading">
+          <span class="micro-label">PROBLEM SOLVING</span>
+          <h2 id="challenges-heading">Key Challenges</h2>
+        </div>
+        <div class="cs-challenges">
+          {challenges.map((challenge, index) => (
+            <article>
+              <span class="cs-challenge-number">0{index + 1}</span>
+              <h3>{challenge.title}</h3>
+              <dl>
+                <div><dt>Problem</dt><dd>{challenge.problem}</dd></div>
+                <div><dt>Approach</dt><dd>{challenge.approach}</dd></div>
+                <div><dt>Result</dt><dd>{challenge.result}</dd></div>
+              </dl>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section cs-section-neutral light-section" aria-labelledby="performance-heading">
+      <div class="container">
+        <div class="cs-section-heading">
+          <span class="micro-label">LIGHTWEIGHT BY DEFAULT</span>
+          <h2 id="performance-heading">Performance by Design</h2>
+          <p>A major principle of the rebuild was keeping the platform lightweight.</p>
+        </div>
+        <div class="cs-performance-layout">
+          <ul class="cs-editorial-list">
+            {performanceFeatures.map((feature) => <li>{feature}</li>)}
+          </ul>
+          <aside class="cs-performance-callout" aria-label="Laboratory performance snapshot">
+            <span class="cs-diagram-label">LABORATORY SNAPSHOT / AUGUST 2026</span>
+            <CaseStudyMetrics metrics={performanceMetrics} compact />
+            <p>These values are a point-in-time laboratory snapshot from August 2026 and should not be interpreted as current field Core Web Vitals.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section light-section" aria-labelledby="seo-heading">
+      <div class="container cs-seo-layout">
+        <div class="cs-section-heading">
+          <span class="micro-label">DISCOVERABILITY</span>
+          <h2 id="seo-heading">SEO and Migration Validation</h2>
+          <p>Preserving discoverability was an important part of moving a long-running content platform.</p>
+          <p>The migration included an audit of 9,299 URLs to identify broken links, redirects and references to obsolete environments.</p>
+        </div>
+        <ul class="cs-editorial-list">
+          {seoFeatures.map((feature) => <li>{feature}</li>)}
+        </ul>
+        <p class="cs-wide-closing">The objective was to make discoverability part of the platform architecture rather than an afterthought applied after migration.</p>
+      </div>
+    </section>
+
+    <section class="cs-section cs-section-dark dark-section" aria-labelledby="workflow-heading">
+      <div class="container">
+        <div class="cs-section-heading cs-section-heading-dark">
+          <span class="micro-label">DELIVERY MODEL</span>
+          <h2 id="workflow-heading">AI-Assisted Development Workflow</h2>
+          <p>The current project uses a structured human-led, AI-assisted development workflow.</p>
+        </div>
+        <DevelopmentWorkflow stages={workflowStages} roles={workflowRoles} />
+        <p class="cs-workflow-closing">AI accelerates implementation and analysis, but product decisions, architecture, requirements and final acceptance remain human-owned.</p>
+      </div>
+    </section>
+
+    <section class="cs-section light-section" aria-labelledby="validation-heading">
+      <div class="container">
+        <div class="cs-section-heading">
+          <span class="micro-label">QUALITY CONTROL</span>
+          <h2 id="validation-heading">Validation</h2>
+          <p>The rebuild was verified beyond individual templates and local implementation checks.</p>
+        </div>
+        <CaseStudyMetrics metrics={validationMetrics} />
+        <ul class="cs-validation-areas" aria-label="Validated areas">
+          {validationAreas.map((area) => <li>{area}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <section class="cs-section cs-section-neutral light-section" aria-labelledby="gallery-heading">
+      <div class="container">
+        <div class="cs-section-heading">
+          <span class="micro-label">THE PRODUCT</span>
+          <h2 id="gallery-heading">Selected Views</h2>
+        </div>
+        <CaseStudyGallery items={galleryItems} />
+      </div>
+    </section>
+
+    <section class="cs-section light-section" aria-labelledby="foundation-heading">
+      <div class="container cs-foundation-layout">
+        <div class="cs-section-heading">
+          <span class="micro-label">TRANSFERABLE PATTERNS</span>
+          <h2 id="foundation-heading">A Reusable Foundation</h2>
+          <p>Tawerna Gothic also functions as a practical development environment for patterns that can later be adapted to other content-driven WordPress projects.</p>
+        </div>
+        <ul class="cs-editorial-list">
+          {reusableFoundation.map((item) => <li>{item}</li>)}
+        </ul>
+        <div class="cs-supporting-copy">
+          <p>The goal is not to clone Tawerna Gothic into other projects.</p>
+          <p>Instead, proven technical patterns can be extracted, parameterized and adapted while each new project receives its own information architecture and visual identity.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section light-section cs-lessons-section" aria-labelledby="lessons-heading">
+      <div class="container cs-lessons-layout">
+        <div class="cs-section-heading">
+          <span class="micro-label">REFLECTION</span>
+          <h2 id="lessons-heading">What I Learned</h2>
+          <p>Tawerna Gothic has evolved alongside my own technical experience.</p>
+          <p>What started as a simple HTML fan site became a long-running environment for learning web development, content architecture, WordPress, hosting, analytics, automation and increasingly structured software development.</p>
+        </div>
+        <ol class="cs-lessons">
+          {lessons.map((lesson, index) => (
+            <li><span>{String(index + 1).padStart(2, '0')}</span><p>{lesson}</p></li>
+          ))}
+        </ol>
+        <p class="cs-wide-closing">The platform remains actively maintained and continues to evolve as both a public gaming website and a practical technical project.</p>
+      </div>
+    </section>
+
+    <section class="cs-final-cta dark-section" aria-labelledby="final-cta-heading">
+      <div class="container">
+        <span class="micro-label">TAWERNA GOTHIC</span>
+        <h2 id="final-cta-heading">Explore the live platform.</h2>
+        <div class="cs-actions">
+          <a class="button button-primary" href="https://tawerna-gothic.pl" target="_blank" rel="noopener noreferrer">Visit Tawerna Gothic</a>
+          <a class="button button-secondary" href="/#projects">Back to projects</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

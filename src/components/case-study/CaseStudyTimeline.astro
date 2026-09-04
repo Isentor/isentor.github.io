@@ -1,0 +1,27 @@
+---
+import type { TimelineEntry } from '../../data/tawernaGothicCaseStudy';
+
+interface Props {
+  entries: TimelineEntry[];
+}
+
+const { entries } = Astro.props;
+---
+
+<section class="cs-section cs-section-dark dark-section" aria-labelledby="evolution-heading">
+  <div class="container">
+    <div class="cs-section-heading cs-section-heading-dark">
+      <span class="micro-label">PROJECT HISTORY</span>
+      <h2 id="evolution-heading">Evolution</h2>
+    </div>
+    <ol class="cs-timeline">
+      {entries.map((entry) => (
+        <li>
+          <span class="cs-timeline-period">{entry.period}</span>
+          <h3>{entry.title}</h3>
+          <p>{entry.description}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

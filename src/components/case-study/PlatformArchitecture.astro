@@ -1,0 +1,55 @@
+---
+interface ArchitectureBranch {
+  title: string;
+  items?: readonly string[];
+  child?: {
+    title: string;
+    items: readonly string[];
+  };
+}
+
+interface Props {
+  architecture: {
+    user: string;
+    platform: string;
+    branches: readonly ArchitectureBranch[];
+  };
+}
+
+const { architecture } = Astro.props;
+---
+
+<div class="cs-platform-diagram" role="group" aria-label="Platform architecture">
+  <ul class="cs-platform-root">
+    <li>
+      <span class="cs-platform-user">{architecture.user}</span>
+      <ul>
+        <li>
+          <strong class="cs-platform-name">{architecture.platform}</strong>
+          <ul class="cs-platform-branches">
+            {architecture.branches.map((branch) => (
+              <li>
+                <h3>{branch.title}</h3>
+                {branch.child && (
+                  <ul class="cs-platform-child-theme">
+                    <li>
+                      <h4>{branch.child.title}</h4>
+                      <ul>
+                        {branch.child.items.map((item) => <li>{item}</li>)}
+                      </ul>
+                    </li>
+                  </ul>
+                )}
+                {branch.items && (
+                  <ul>
+                    {branch.items.map((item) => <li>{item}</li>)}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>

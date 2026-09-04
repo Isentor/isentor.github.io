@@ -1,0 +1,32 @@
+---
+import type { informationArchitecture as informationArchitectureData } from '../../data/tawernaGothicCaseStudy';
+
+interface Props {
+  architecture: typeof informationArchitectureData;
+}
+
+const { architecture } = Astro.props;
+---
+
+<div class="cs-ia-diagram" role="group" aria-label="Information architecture">
+  <div class="cs-ia-dimensions">
+    {architecture.dimensions.map((dimension) => (
+      <article class="cs-ia-card">
+        <span class="cs-diagram-label">{dimension.label}</span>
+        <h3>{dimension.title}</h3>
+        <ul>
+          {dimension.examples.map((example) => <li>{example}</li>)}
+        </ul>
+      </article>
+    ))}
+  </div>
+  <div class="cs-ia-equation">
+    <span>Topic</span><i aria-hidden="true">+</i><span>Content Function</span><i aria-hidden="true">-&gt;</i><strong>One article</strong>
+  </div>
+  <div class="cs-discovery">
+    <span class="cs-diagram-label">MULTIPLE DISCOVERY PATHS</span>
+    <ul>
+      {architecture.discoveryPaths.map((path) => <li>{path}</li>)}
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+---
+import type { hero as heroData } from '../../data/tawernaGothicCaseStudy';
+
+interface Props {
+  hero: typeof heroData;
+}
+
+const { hero } = Astro.props;
+---
+
+<section class="cs-hero dark-section" aria-labelledby="case-study-title">
+  <div class="container cs-hero-grid">
+    <div class="cs-hero-copy">
+      <span class="micro-label">{hero.label}</span>
+      <h1 id="case-study-title">{hero.title}</h1>
+      <p class="cs-hero-headline">{hero.headline}</p>
+      <p class="cs-hero-lead">{hero.lead}</p>
+
+      <dl class="cs-hero-meta">
+        {hero.metadata.map((item) => (
+          <div>
+            <dt>{item.label}</dt>
+            <dd>{item.value}</dd>
+          </div>
+        ))}
+      </dl>
+
+      <div class="cs-actions">
+        <a class="button button-primary" href="https://tawerna-gothic.pl" target="_blank" rel="noopener noreferrer">
+          Visit live site
+        </a>
+        <a class="button button-secondary" href="/#projects">Back to projects</a>
+      </div>
+    </div>
+
+    <div class="cs-hero-visual">
+      <div class="cs-browser-frame">
+        <div class="cs-browser-bar" aria-hidden="true"><span></span><span></span><span></span><i></i></div>
+        <img
+          src={hero.image.src}
+          alt={hero.image.alt}
+          width={hero.image.width}
+          height={hero.image.height}
+          decoding="async"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </div>
+</section>

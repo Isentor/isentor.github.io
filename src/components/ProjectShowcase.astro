@@ -40,7 +40,13 @@ const image =
           </a>
         )
       }
-      <span class="coming-soon">Case study coming soon</span>
+      {
+        project.caseStudyUrl && project.caseStudyLabel ? (
+          <a class="project-case-study-link" href={project.caseStudyUrl}>{project.caseStudyLabel}</a>
+        ) : (
+          <span class="coming-soon">Case study coming soon</span>
+        )
+      }
     </div>
   </div>
 
@@ -86,3 +92,30 @@ const image =
     </div>
   </div>
 </article>
+
+<style>
+  .project-case-study-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 1.1rem;
+    border: 1px solid var(--accent-dark);
+    color: var(--accent-text);
+    font-size: 0.78rem;
+    font-weight: 750;
+    letter-spacing: 0.04em;
+    transition: background-color 180ms ease, color 180ms ease, transform 180ms ease;
+  }
+
+  .project-case-study-link:hover {
+    background: var(--accent-dark);
+    color: var(--light);
+    transform: translateY(-2px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-case-study-link:hover {
+      transform: none;
+    }
+  }
+</style>

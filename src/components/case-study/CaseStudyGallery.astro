@@ -1,0 +1,27 @@
+---
+import type { GalleryItem } from '../../data/tawernaGothicCaseStudy';
+
+interface Props {
+  items: GalleryItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="cs-gallery">
+  {items.map((item) => (
+    <figure class:list={['cs-gallery-item', { 'cs-gallery-item-mobile': item.mobile }]}>
+      <div class="cs-gallery-image">
+        <img
+          src={item.src}
+          alt={item.alt}
+          width={item.width}
+          height={item.height}
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <figcaption>{item.caption}</figcaption>
+    </figure>
+  ))}
+</div>
