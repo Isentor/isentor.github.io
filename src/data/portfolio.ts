@@ -27,10 +27,10 @@ export const projects: Project[] = [
     name: 'Tawerna Gothic',
     category: 'WEB PLATFORM',
     description:
-      'A long-running Polish gaming platform focused on the Gothic series, combining an extensive content archive with current news, guides and editorial coverage.',
+      'A long-running gaming platform combining a custom WordPress website with human-led editorial workflows and AI-assisted orchestration.',
     details:
-      'I develop and maintain the WordPress-based platform, working across its technical implementation, content architecture, publishing workflows and integration with the broader Tawerna Gothic ecosystem.',
-    technologies: ['WordPress', 'PHP', 'MySQL', 'Content Architecture'],
+      'I own the product direction and information architecture, develop the platform and coordinate research, content and QA. A new publishing integration is locally implemented and still under regression verification.',
+    technologies: ['WordPress', 'PHP', 'Python', 'Workflow Orchestration'],
     visualType: 'web',
     image: '/projects/tawerna-gothic/homepage-desktop.webp',
     imageAlt: 'Screenshot of the Tawerna Gothic homepage',
@@ -45,19 +45,25 @@ export const projects: Project[] = [
     name: 'Grytycy.pl',
     category: 'WEB ARCHITECTURE',
     description:
-      'A gaming website undergoing a broader technical and information architecture rebuild, with a focus on scalable content structure and long-term maintainability.',
-    technologies: ['WordPress', 'PHP', 'MySQL', 'Information Architecture'],
+      'A staged WordPress rebuild with a custom article model, validated content migration, legacy URL normalization and a responsive child theme.',
+    details:
+      'The frontend foundation is deployed and verified. A new editorial homepage is a locally verified release candidate, not yet deployed.',
+    technologies: ['WordPress', 'PHP', 'Content Modelling', 'Migration Validation'],
     visualType: 'architecture',
+    caseStudyUrl: '/projects/grytycy/',
+    caseStudyLabel: 'View case study',
   },
   {
     name: 'Content Publishing Automation',
     category: 'SOFTWARE & AUTOMATION',
     description:
-      'A Python-based system designed to automate the preparation, selection and scheduling of content for social media platforms.',
+      'A modular Python publishing application with transactional SQLite state, validated content packages and a Meta Graph API adapter.',
     details:
-      'The system includes persistent storage, configurable publishing rules, scheduling logic, fallback strategies, validation and safeguards designed to prevent invalid publishing operations.',
-    technologies: ['Python', 'SQLite', 'APIs', 'Scheduling', 'Testing'],
+      'Implemented recovery and reconciliation workflows handle interrupted operations and uncertain external results. Unrestricted production operation is not claimed; credential management remains in development.',
+    technologies: ['Python', 'SQLite', 'REST APIs', 'Recovery', 'Contract Testing'],
     visualType: 'automation',
+    caseStudyUrl: '/projects/content-publishing-automation/',
+    caseStudyLabel: 'View case study',
   },
 ];
 
@@ -70,13 +76,13 @@ export interface ExpertiseArea {
 export const expertiseAreas: ExpertiseArea[] = [
   {
     title: 'Software & Automation',
-    summary: 'Practical systems designed around repeatable workflows, clear rules and reliable safeguards.',
-    skills: ['Python applications', 'Workflow automation', 'SQLite', 'REST APIs', 'Scheduling', 'Validation', 'Testing'],
+    summary: 'Publishing tools and human-led workflows with explicit state, integrity checks and recovery paths.',
+    skills: ['Python applications', 'Workflow orchestration', 'SQLite transactions', 'REST APIs', 'Scheduling', 'Data integrity', 'Recovery workflows', 'Integration and contract testing'],
   },
   {
     title: 'Web Development',
-    summary: 'Content-driven websites built for maintainability, publishing needs and long-term growth.',
-    skills: ['PHP', 'MySQL', 'HTML', 'CSS', 'JavaScript', 'WordPress', 'WooCommerce', 'Website architecture'],
+    summary: 'Custom content platforms, controlled migrations and responsive interfaces built for long-term maintenance.',
+    skills: ['PHP', 'MySQL', 'HTML', 'CSS', 'JavaScript', 'WordPress', 'WooCommerce', 'Content modelling', 'Migration validation', 'Technical SEO', 'Accessibility verification'],
   },
   {
     title: 'Data & Analytics',
@@ -115,6 +121,6 @@ export const experienceItems: ExperienceItem[] = [
   {
     period: 'Current Focus',
     title: 'Web Development & Automation',
-    description: 'Building production websites, Python tools and automation systems designed around real workflows and practical problems.',
+    description: 'Developing custom WordPress platforms, reliable Python publishing tools and human-led AI workflows, with requirements, implementation review and evidence-based acceptance.',
   },
 ];

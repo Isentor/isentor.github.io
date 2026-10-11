@@ -4,17 +4,18 @@ import { readFile, readdir } from 'node:fs/promises';
 
 const distDirectory = new URL('../dist/', import.meta.url);
 const projectDirectory = new URL('../', import.meta.url);
-const expectedRoutes = ['index.html', 'projects/tawerna-gothic/index.html'];
+const expectedRoutes = ['index.html', 'projects/content-publishing-automation/index.html', 'projects/grytycy/index.html', 'projects/tawerna-gothic/index.html'];
 const htmlFiles = (await readdir(distDirectory, { recursive: true }))
   .filter((file) => file.endsWith('.html'))
   .map((file) => file.replaceAll('\\', '/'))
   .sort();
 
-assert.deepEqual(htmlFiles, expectedRoutes, 'build must generate exactly the homepage and Tawerna Gothic case study routes');
+assert.deepEqual(htmlFiles, expectedRoutes, 'build must generate the homepage and all three project case studies');
 
 const homepage = await readFile(new URL('index.html', distDirectory), 'utf8');
 const caseStudy = await readFile(new URL('projects/tawerna-gothic/index.html', distDirectory), 'utf8');
-const generatedHtml = `${homepage}\n${caseStudy}`;
+const generatedPages = await Promise.all(htmlFiles.map((file) => readFile(new URL(file, distDirectory), 'utf8')));
+const generatedHtml = generatedPages.join('\n');
 
 const ignoredSourceDirectories = new Set(['.git', '.superpowers', 'dist', 'node_modules']);
 const sourceExtension = /\.(?:astro|css|js|json|md|mjs|ts|tsx|ya?ml)$/;
@@ -46,10 +47,6 @@ const homepageText = [
   'Experience',
   'About',
   "Let's build something useful.",
-  'A long-running Polish gaming platform focused on the Gothic series, combining an extensive content archive with current news, guides and editorial coverage.',
-  'I develop and maintain the WordPress-based platform, working across its technical implementation, content architecture, publishing workflows and integration with the broader Tawerna Gothic ecosystem.',
-  'A gaming website undergoing a broader technical and information architecture rebuild, with a focus on scalable content structure and long-term maintainability.',
-  'A Python-based system designed to automate the preparation, selection and scheduling of content for social media platforms.',
 ];
 const contactLinks = [
   'https://github.com/Isentor',
@@ -74,10 +71,12 @@ for (const link of contactLinks) {
 }
 
 assert.equal((homepage.match(/<h1(?:\s|>)/g) ?? []).length, 1, 'homepage must contain exactly one h1');
-assert.equal((homepage.match(/Case study coming soon/g) ?? []).length, 2, 'only two homepage projects must remain coming soon');
+assert.equal((homepage.match(/Case study coming soon/g) ?? []).length, 0, 'all selected projects must have available case studies');
 assert.equal((homepage.match(/href="\/projects\/tawerna-gothic\/"/g) ?? []).length, 1, 'homepage must link once to the Tawerna Gothic case study');
 assert.match(homepage, /<a\b[^>]*href="\/projects\/tawerna-gothic\/"[^>]*>\s*View case study\s*<\/a>/, 'Tawerna Gothic must expose the View case study CTA');
-assert.doesNotMatch(homepage, /href="\/projects\/(?:grytycy|content-publishing-automation)\/?"/, 'placeholder projects must not link to case studies');
+for (const slug of ['grytycy', 'content-publishing-automation']) {
+  assert.match(homepage, new RegExp(`<a\\b[^>]*href="/projects/${slug}/"[^>]*>\\s*View case study\\s*</a>`), `${slug} must expose an active case study CTA`);
+}
 assert.match(homepage, /class="hero-showcase" aria-hidden="true"/, 'decorative homepage hero must be hidden from assistive technology');
 
 const tawernaHomepageLink = (homepage.match(/<a\b[^>]*href="https:\/\/tawerna-gothic\.pl"[^>]*>[\s\S]*?<\/a>/) ?? [])[0] ?? '';
@@ -155,7 +154,9 @@ const stripMarkup = (value) => value
   .replaceAll('&quot;', '"')
   .replace(/\s+/g, ' ')
   .trim();
-const caseStudyHeadings = [...caseStudy.matchAll(/<h2\b[^>]*>([\s\S]*?)<\/h2>/g)].map((match) => stripMarkup(match[1]));
+// Preserve the previously approved platform narrative independently of the new progress sections.
+const legacyCaseStudy = caseStudy.replace(/<section\b[^>]*data-progress-update[^>]*>[\s\S]*?<\/section>/g, '');
+const caseStudyHeadings = [...legacyCaseStudy.matchAll(/<h2\b[^>]*>([\s\S]*?)<\/h2>/g)].map((match) => stripMarkup(match[1]));
 assert.deepEqual(
   caseStudyHeadings,
   [
@@ -216,7 +217,7 @@ for (const copy of approvedCopy) {
   assert.ok(caseStudy.includes(copy), `case study must preserve approved copy: ${copy}`);
 }
 assert.match(caseStudy, /<dt>0<\/dt><dd>Missing posts or detected content differences<\/dd>/, 'migration zero metric must remain paired with its approved label');
-const caseStudyMain = (caseStudy.match(/<main\b[^>]*>([\s\S]*?)<\/main>/) ?? [])[1] ?? '';
+const caseStudyMain = (legacyCaseStudy.match(/<main\b[^>]*>([\s\S]*?)<\/main>/) ?? [])[1] ?? '';
 const caseStudyCopyDigest = createHash('sha256').update(stripMarkup(caseStudyMain)).digest('hex');
 assert.equal(
   caseStudyCopyDigest,
@@ -254,6 +255,23 @@ for (const [src, width, height, shouldLazyLoad] of expectedCaseStudyImages) {
 
 for (const link of generatedHtml.match(/<a\b[^>]*target="_blank"[^>]*>/g) ?? []) {
   assert.ok(link.includes('rel="noopener noreferrer"'), 'every external new-tab link must include noopener noreferrer');
+}
+
+for (const [index, html] of generatedPages.entries()) {
+  const route = htmlFiles[index];
+  assert.equal((html.match(/<h1(?:\s|>)/g) ?? []).length, 1, `${route} must contain exactly one h1`);
+  assert.match(html, /<main\b[^>]*id="main-content"/, `${route} must expose the skip-link target`);
+  const canonicalPath = route === 'index.html' ? '/' : `/${route.replace(/index\.html$/, '')}`;
+  assert.ok(html.includes(`rel="canonical" href="https://isentor.github.io${canonicalPath}"`), `${route} must have its own canonical`);
+  for (const match of html.matchAll(/href="(\/[^"?#]*)(?:[?#][^"]*)?"/g)) {
+    const path = match[1];
+    if (path.endsWith('/')) {
+      assert.ok(expectedRoutes.includes(`${path.slice(1)}index.html`), `${route} must not link to missing route ${path}`);
+    }
+  }
+  for (const anchor of [...html.matchAll(/href="#([^"]+)"/g)].map((match) => match[1])) {
+    assert.ok(html.includes(`id="${anchor}"`), `${route} local link #${anchor} must have a target`);
+  }
 }
 
 assert.doesNotMatch(generatedHtml, /href="(?:\s*|#)"/, 'generated HTML must not contain empty links');

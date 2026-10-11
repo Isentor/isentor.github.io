@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../Header.astro';
+import Footer from '../Footer.astro';
+import '../../styles/case-study.css';
+
+interface Section {
+  label: string;
+  title: string;
+  paragraphs: string[];
+  items?: string[];
+}
+
+interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  category: string;
+  headline: string;
+  lead: string;
+  stack: string;
+  status: string;
+  sections: Section[];
+}
+
+const { title, description, canonical, category, headline, lead, stack, status, sections } = Astro.props;
+---
+
+<BaseLayout title={`${title} Case Study | Maurycy Pytel`} {description} {canonical}>
+  <Header />
+  <main id="main-content" class="case-study-page cs-focused-page">
+    <section class="cs-hero cs-text-hero dark-section" aria-labelledby="project-title">
+      <div class="container cs-hero-grid">
+        <div class="cs-hero-copy">
+          <span class="micro-label">{category} / CASE STUDY</span>
+          <h1 id="project-title">{title}</h1>
+          <p class="cs-hero-headline">{headline}</p>
+          <p class="cs-hero-lead">{lead}</p>
+          <dl class="cs-hero-meta">
+            <div><dt>Role</dt><dd>Technical Owner &amp; Product Lead</dd></div>
+            <div><dt>Stack</dt><dd>{stack}</dd></div>
+            <div><dt>Status / October 2026</dt><dd>{status}</dd></div>
+          </dl>
+          <div class="cs-actions"><a class="button button-secondary" href="/#projects">Back to projects</a></div>
+        </div>
+      </div>
+    </section>
+    {sections.map((section, index) => (
+      <section class:list={['cs-section', 'light-section', { 'cs-section-neutral': index % 2 === 1 }]} aria-labelledby={`section-${index}`}>
+        <div class="container cs-foundation-layout">
+          <div class="cs-section-heading">
+            <span class="micro-label">{section.label}</span>
+            <h2 id={`section-${index}`}>{section.title}</h2>
+          </div>
+          <div class="cs-supporting-copy">
+            {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+            {section.items && <ul class="cs-editorial-list">{section.items.map((item) => <li>{item}</li>)}</ul>}
+          </div>
+        </div>
+      </section>
+    ))}
+    <section class="cs-final-cta dark-section" aria-labelledby="next-project-heading">
+      <div class="container">
+        <span class="micro-label">MORE WORK</span>
+        <h2 id="next-project-heading">Explore the other projects.</h2>
+        <div class="cs-actions"><a class="button button-primary" href="/#projects">Back to projects</a></div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

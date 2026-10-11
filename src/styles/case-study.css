@@ -41,6 +41,29 @@
   min-width: 0;
 }
 
+.case-study-page .cs-text-hero .cs-hero-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.case-study-page .cs-text-hero::before {
+  display: none;
+}
+
+.case-study-page .cs-text-hero h1 {
+  max-width: 20ch;
+}
+
+.case-study-page .cs-text-hero .cs-hero-meta {
+  max-width: 850px;
+}
+
+.case-study-page.cs-focused-page .cs-foundation-layout > .cs-supporting-copy {
+  grid-column: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
 .case-study-page .cs-hero h1 {
   margin: 1.4rem 0 1.1rem;
   color: var(--text-light);

@@ -182,6 +182,40 @@ import '../../../styles/case-study.css';
       </div>
     </section>
 
+    <section class="cs-section cs-section-dark dark-section" data-progress-update aria-labelledby="orchestration-heading">
+      <div class="container">
+        <div class="cs-section-heading cs-section-heading-dark">
+          <span class="micro-label">EDITORIAL ECOSYSTEM / OCTOBER 2026</span>
+          <h2 id="orchestration-heading">Human-Led Workflow Orchestration</h2>
+          <p>The platform now sits within a coordinated editorial workflow covering research, scripting, thumbnails, short-form content, localization and portal writing.</p>
+          <p>An instruction-based director routes work to the appropriate specialist, checks prerequisites and defines handoffs, quality checks and final acceptance. It coordinates AI-assisted work; it is not a standalone autonomous service.</p>
+        </div>
+        <ol class="cs-workflow-stages" aria-label="Editorial handoff sequence">
+          {['Task and prerequisites', 'Specialist workflow', 'Validated handoff', 'Content and source QA', 'Human acceptance'].map((stage, index) => (
+            <li><span>{String(index + 1).padStart(2, '0')}</span><strong>{stage}</strong></li>
+          ))}
+        </ol>
+        <p class="cs-workflow-closing">Supporting PowerShell tools check file hashes, source completeness and handoff conflicts. Research and editorial checks preserve source provenance, facts, quotations and uncertainty rather than treating a polished draft as proof of accuracy.</p>
+      </div>
+    </section>
+
+    <section class="cs-section cs-section-neutral light-section" data-progress-update aria-labelledby="publishing-progress-heading">
+      <div class="container cs-two-column">
+        <article>
+          <span class="micro-label">LOCAL IMPLEMENTATION</span>
+          <h2 id="publishing-progress-heading">Publishing Integration in Development</h2>
+          <p>A Python package builder and custom WordPress REST integration prepare structured Gutenberg content, validate media and compare the resulting state with the intended package.</p>
+          <p>The implementation separates package identity, execution and readback, with safeguards against conflicting retries and duplicate media operations.</p>
+        </article>
+        <article>
+          <span class="micro-label">STATUS / OCTOBER 2026</span>
+          <h3>Implemented locally, not deployed</h3>
+          <p>Local unit and integration checks have exercised the implementation. Final regression verification is still incomplete, with review and release acceptance remaining before production deployment.</p>
+          <p>This is a separate development milestone from the already running public website. Local checks are not presented as proof of production publishing.</p>
+        </article>
+      </div>
+    </section>
+
     <section class="cs-section light-section" aria-labelledby="validation-heading">
       <div class="container">
         <div class="cs-section-heading">

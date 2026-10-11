@@ -6,11 +6,13 @@ Live site: [isentor.github.io](https://isentor.github.io)
 
 ## Status
 
-Homepage and first full project case study.
+Homepage and three project case studies, with deployed features, local implementation and experiments distinguished explicitly. Project progress descriptions reflect the October 2026 review.
 
 Routes:
 
 - `/`
+- `/projects/content-publishing-automation/`
+- `/projects/grytycy/`
 - `/projects/tawerna-gothic/`
 
 ## Stack
@@ -43,7 +45,7 @@ npm run build
 npm run verify
 ```
 
-The verification script checks the generated homepage and Tawerna Gothic case study structure, required content and links, metadata, route scope, and reduced motion support.
+The verification script checks all four generated routes, working case-study links, metadata, heading and skip-link structure, privacy guards and reduced motion support. It also preserves the previously approved Tawerna Gothic platform narrative independently of the added progress sections.
 
 ## Production build
 

@@ -1,0 +1,59 @@
+---
+import FocusedCaseStudy from '../../../components/case-study/FocusedCaseStudy.astro';
+
+const sections = [
+  {
+    label: 'THE WORKFLOW',
+    title: 'More Than a Publishing Schedule',
+    paragraphs: [
+      'Content Publishing Automation is a modular Python application for preparing, selecting and scheduling social media content. The practical challenge is not just deciding when to publish: the system must preserve state, validate prepared files and respond safely when an external operation has an uncertain result.',
+      'I define the operational requirements, priorities and acceptance criteria, coordinate AI-assisted implementation, contribute to development and review the resulting behavior. The project is grounded in a real content workflow without presenting unrestricted production operation as complete.',
+    ],
+  },
+  {
+    label: 'IMPLEMENTED COMPONENTS',
+    title: 'Packages, Selection and Persistent State',
+    paragraphs: [
+      'The command-line workflow combines configurable selection rules, scheduling, transactional SQLite storage and validated publishing packages. Image hashes and visual similarity checks support duplicate control.',
+      'Prepared packages are written atomically and checked against their source files. Reservations bind planned content to its prepared identity, helping prevent a slot from being silently reused for different material.',
+    ],
+    items: ['Modular Python CLI', 'SQLite migrations, history and reservations', 'Deterministic selection and deduplication', 'Atomic manifests and SHA-256 integrity checks'],
+  },
+  {
+    label: 'INTEGRATION DESIGN',
+    title: 'Handle Uncertainty Explicitly',
+    paragraphs: [
+      'The Meta Graph API adapter supports scheduled-content operations and readback. Publication intent is stored before an external request, while confirmation and local state updates are handled as separate steps.',
+      'When a response is ambiguous, the workflow calls for reconciliation rather than an unconditional retry. Cancellation also requires verification of the external result. These are safeguards for specific operations, not a universal exactly-once guarantee.',
+      'Diagnostic checks separate credential, permission and identity problems, with sensitive values excluded from user-facing error messages.',
+    ],
+  },
+  {
+    label: 'QUALITY AND STATUS / OCTOBER 2026',
+    title: 'Implemented Core, Further Work in Progress',
+    paragraphs: [
+      'The core CLI, storage, package preparation, API adapter and recovery paths are implemented. The test suite includes contract checks, transport failures and crash/restart scenarios. Their presence is not presented as a fresh pass of every test or proof of continuous production service.',
+      'A separate credential-management component is in development. Immutable contracts and a canonical semantic codec are implemented, with byte-exact test vectors; the complete credential-management service and desktop interface are not finished.',
+      'The project does not claim unrestricted production readiness, continuous automatic publishing or a deployed desktop application.',
+    ],
+  },
+  {
+    label: 'REFLECTION',
+    title: 'Reliability Is Part of the Product',
+    paragraphs: ['The most important lesson is to distinguish intended work, attempted external operations and verified results. Persisting these states makes failures visible and gives recovery a defined path.'],
+    items: ['Transactional state and recovery workflows', 'File integrity and content deduplication', 'REST integration and external readback', 'Contract testing and failure scenarios', 'Human-led acceptance of AI-assisted development'],
+  },
+];
+---
+
+<FocusedCaseStudy
+  title="Content Publishing Automation"
+  description="A modular Python publishing application with transactional SQLite state, validated packages, a Meta Graph API adapter and explicit recovery workflows."
+  canonical="https://isentor.github.io/projects/content-publishing-automation/"
+  category="SOFTWARE & AUTOMATION"
+  headline="Reliable state, not just a schedule."
+  lead="A publishing workflow built around validated packages, persistent intent and verification of external results."
+  stack="Python · SQLite · REST APIs · Scheduling · Contract Testing"
+  status="Core implemented; credential management in development; production readiness not claimed."
+  {sections}
+/>

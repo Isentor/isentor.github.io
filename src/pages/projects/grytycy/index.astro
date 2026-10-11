@@ -1,0 +1,59 @@
+---
+import FocusedCaseStudy from '../../../components/case-study/FocusedCaseStudy.astro';
+
+const sections = [
+  {
+    label: 'THE PROBLEM',
+    title: 'Rebuild the Content Foundation',
+    paragraphs: [
+      'Grytycy.pl is a gaming website undergoing a staged technical and information architecture rebuild. The work is not limited to changing its appearance: the underlying article model, legacy routes and frontend foundation need to support predictable behavior and long-term maintenance.',
+      'I direct the requirements and information architecture, coordinate implementation and review, and make acceptance decisions. Claude supports development, tests and documentation within a human-led workflow.',
+    ],
+  },
+  {
+    label: 'DATA INTEGRITY',
+    title: 'A Canonical Article Model',
+    paragraphs: [
+      'A custom WordPress backend defines a canonical article model and controlled transitions. Migration work treats existing content as data that must be classified, validated and verified rather than simply imported.',
+      'The September 2026 migration report records 674 assessed entries: 451 accepted for migration and 223 excluded. All 451 accepted entries were migrated successfully, with no incorrect topic or format assignments, duplicate article identifiers or unexpected column changes in the checked set.',
+      'The report also records an independent production re-verification. These figures describe that specific migration and verification, not a guarantee about all future content.',
+    ],
+  },
+  {
+    label: 'COMPATIBILITY AND DISCOVERABILITY',
+    title: 'Legacy Routing and Technical SEO',
+    paragraphs: [
+      'Custom routing normalizes legacy hub and global-search URLs with a single permanent redirect, including pagination and supported query parameters. The aim is to preserve useful entry points while removing ambiguity from the new architecture.',
+      'The implementation is accompanied by unit, integration and smoke-test reports. Selected application-level security improvements were also implemented, but they are not presented as a complete security certification.',
+    ],
+    items: ['Canonical URL behavior', 'Legacy compatibility', 'Parameter normalization', 'Regression checks for existing routes'],
+  },
+  {
+    label: 'DELIVERY IN STAGES',
+    title: 'Frontend Foundation and Homepage',
+    paragraphs: [
+      'The responsive child-theme foundation was recorded as deployed, verified and closed on 5 October 2026. Its validation covered seven routes at six viewport widths, with no critical or serious axe findings and no runtime errors in the controlled set.',
+      'The new editorial homepage is a different milestone. As of 7 October 2026 it is implemented and locally verified as a release candidate, but not deployed. Accessibility verification for the foundation is not carried over as proof for the new homepage.',
+      'The homepage implementation includes a controlled response when rendering fails, rather than exposing a partially rendered page as a successful result.',
+    ],
+  },
+  {
+    label: 'REFLECTION',
+    title: 'What This Project Taught Me',
+    paragraphs: ['A content-platform rebuild requires clear data contracts, explicit migration decisions and separate acceptance gates for backend changes and frontend releases. A passing local check and a verified deployment are different claims.'],
+    items: ['Content modelling and controlled migrations', 'Custom WordPress and PHP development', 'Technical SEO and legacy compatibility', 'Responsive UI and accessibility verification', 'Reviewing AI-assisted implementation against acceptance criteria'],
+  },
+];
+---
+
+<FocusedCaseStudy
+  title="Grytycy.pl"
+  description="A staged WordPress rebuild with a canonical article model, validated migration, legacy URL normalization and a responsive frontend foundation."
+  canonical="https://isentor.github.io/projects/grytycy/"
+  category="WEB ARCHITECTURE"
+  headline="A stronger content model before a new homepage."
+  lead="A custom WordPress backend and a controlled migration provide the foundation for a maintainable gaming platform."
+  stack="WordPress · PHP · MySQL · Responsive UI · Integration Testing"
+  status="Frontend foundation deployed; new homepage is a local release candidate."
+  {sections}
+/>
