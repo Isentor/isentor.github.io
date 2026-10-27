@@ -202,15 +202,15 @@ import '../../../styles/case-study.css';
     <section class="cs-section cs-section-neutral light-section" data-progress-update aria-labelledby="publishing-progress-heading">
       <div class="container cs-two-column">
         <article>
-          <span class="micro-label">LOCAL IMPLEMENTATION</span>
+          <span class="micro-label">IMPLEMENTED, NOT DEPLOYED</span>
           <h2 id="publishing-progress-heading">Publishing Integration in Development</h2>
           <p>A Python package builder and custom WordPress REST integration prepare structured Gutenberg content, validate media and compare the resulting state with the intended package.</p>
-          <p>The implementation separates package identity, execution and readback, with safeguards against conflicting retries and duplicate media operations.</p>
+          <p>The implementation separates package identity, execution and readback, with safeguards against conflicting retries and duplicate media operations. Publishing a draft requires a separate approval, and an outcome that cannot be confirmed is reconciled by reading the stored state back, not by repeating the write.</p>
         </article>
         <article>
           <span class="micro-label">STATUS / OCTOBER 2026</span>
-          <h3>Implemented locally, not deployed</h3>
-          <p>Local unit and integration checks have exercised the implementation. Final regression verification is still incomplete, with review and release acceptance remaining before production deployment.</p>
+          <h3>Committed to the repository, not deployed</h3>
+          <p>The Publisher API V1 was committed on 12 October 2026 as part of a custom WordPress plugin. It is exercised by a local test harness with 22 registered cases, a Python layer and a PowerShell transport check. Final regression verification and an independent security review are still open before production deployment.</p>
           <p>This is a separate development milestone from the already running public website. Local checks are not presented as proof of production publishing.</p>
         </article>
       </div>

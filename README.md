@@ -6,7 +6,7 @@ Live site: [isentor.github.io](https://isentor.github.io)
 
 ## Status
 
-Homepage and three project case studies, with deployed features, local implementation and experiments distinguished explicitly. Project progress descriptions reflect the October 2026 review.
+Homepage and three project case studies, with deployed features, local implementation and experiments distinguished explicitly. Project progress descriptions reflect the state of the source repositories as of 12 October 2026; the last review of the live sites was in early October 2026.
 
 Routes:
 

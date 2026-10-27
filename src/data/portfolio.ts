@@ -29,7 +29,7 @@ export const projects: Project[] = [
     description:
       'A long-running gaming platform combining a custom WordPress website with human-led editorial workflows and AI-assisted orchestration.',
     details:
-      'I own the product direction and information architecture, develop the platform and coordinate research, content and QA. A new publishing integration is locally implemented and still under regression verification.',
+      'I own the product direction and information architecture, develop the platform and coordinate research, content and QA. A WordPress publishing API is committed (October 2026) and not yet deployed; final regression verification and a security review remain.',
     technologies: ['WordPress', 'PHP', 'Python', 'Workflow Orchestration'],
     visualType: 'web',
     image: '/projects/tawerna-gothic/homepage-desktop.webp',
@@ -77,12 +77,12 @@ export const expertiseAreas: ExpertiseArea[] = [
   {
     title: 'Software & Automation',
     summary: 'Publishing tools and human-led workflows with explicit state, integrity checks and recovery paths.',
-    skills: ['Python applications', 'Workflow orchestration', 'SQLite transactions', 'REST APIs', 'Scheduling', 'Data integrity', 'Recovery workflows', 'Integration and contract testing'],
+    skills: ['Python applications', 'Workflow orchestration', 'SQLite transactions', 'REST APIs', 'Scheduling', 'Data integrity', 'Recovery workflows', 'Integration and contract testing', 'PowerShell tooling', 'Idempotent operations'],
   },
   {
     title: 'Web Development',
     summary: 'Custom content platforms, controlled migrations and responsive interfaces built for long-term maintenance.',
-    skills: ['PHP', 'MySQL', 'HTML', 'CSS', 'JavaScript', 'WordPress', 'WooCommerce', 'Content modelling', 'Migration validation', 'Technical SEO', 'Accessibility verification'],
+    skills: ['PHP', 'WordPress plugin and REST API development', 'MySQL', 'HTML', 'CSS', 'JavaScript', 'WordPress', 'WooCommerce', 'Content modelling', 'Migration validation', 'Technical SEO', 'Accessibility verification (axe)', 'Security hardening'],
   },
   {
     title: 'Data & Analytics',
