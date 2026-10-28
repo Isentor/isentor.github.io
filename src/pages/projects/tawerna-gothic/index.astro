@@ -206,6 +206,7 @@ import '../../../styles/case-study.css';
           <h2 id="publishing-progress-heading">Publishing Integration in Development</h2>
           <p>A Python package builder and custom WordPress REST integration prepare structured Gutenberg content, validate media and compare the resulting state with the intended package.</p>
           <p>The implementation separates package identity, execution and readback, with safeguards against conflicting retries and duplicate media operations.</p>
+          <p>I revised the retry workflow after the original procedure required too much manual handling. The revised process keeps the same operation identity, prevents concurrent writers and checks the current WordPress state before continuing. This makes retries easier to operate while retaining checks against repeated writes after an uncertain response.</p>
         </article>
         <article>
           <span class="micro-label">STATUS / OCTOBER 2026</span>

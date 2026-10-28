@@ -33,8 +33,9 @@ const sections = [
     title: 'Frontend Foundation and Homepage',
     paragraphs: [
       'The responsive child-theme foundation was recorded as deployed, verified and closed on 5 October 2026. Its validation covered seven routes at six viewport widths, with no critical or serious axe findings and no runtime errors in the controlled set.',
-      'The new editorial homepage is a different milestone. As of 7 October 2026 it is implemented and locally verified as a release candidate, but not deployed. Accessibility verification for the foundation is not carried over as proof for the new homepage.',
+      'The new editorial homepage is a separate milestone. It is implemented and locally verified as a release candidate, but not deployed. A later local acceptance report from 7-8 October 2026 records no axe violations in its tested homepage states, together with keyboard checks. Those results describe the local candidate, not a production release or proof of full WCAG conformance.',
       'The homepage implementation includes a controlled response when rendering fails, rather than exposing a partially rendered page as a successful result.',
+      'Keyboard testing also exposed controls hidden beneath the fixed header. The correction adjusted scroll padding to account for the header and admin bar. Repeating the test with the previous CSS reproduced the failure, providing a negative control. The release report records the remaining partial-overlap cases.',
     ],
   },
   {

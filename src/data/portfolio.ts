@@ -76,22 +76,22 @@ export interface ExpertiseArea {
 export const expertiseAreas: ExpertiseArea[] = [
   {
     title: 'Software & Automation',
-    summary: 'Publishing tools and human-led workflows with explicit state, integrity checks and recovery paths.',
+    summary: 'Python tools and system integrations with persistent state, validated inputs and recovery paths for interrupted operations.',
     skills: ['Python applications', 'Workflow orchestration', 'SQLite transactions', 'REST APIs', 'Scheduling', 'Data integrity', 'Recovery workflows', 'Integration and contract testing'],
   },
   {
     title: 'Web Development',
-    summary: 'Custom content platforms, controlled migrations and responsive interfaces built for long-term maintenance.',
+    summary: 'Custom WordPress platforms and content models, including controlled migrations and responsive interfaces checked in the browser.',
     skills: ['PHP', 'MySQL', 'HTML', 'CSS', 'JavaScript', 'WordPress', 'WooCommerce', 'Content modelling', 'Migration validation', 'Technical SEO', 'Accessibility verification'],
   },
   {
     title: 'Data & Analytics',
-    summary: 'Operational data turned into useful reporting, search insights and better decisions.',
+    summary: 'Sales, inventory, profitability and search data used to support reporting and operational decisions.',
     skills: ['SQL', 'Data analysis', 'Business and operational data', 'Google Analytics', 'Google Search Console', 'Reporting'],
   },
   {
     title: 'Digital & E-commerce',
-    summary: 'Hands-on work across stores, acquisition, content operations and product structure.',
+    summary: 'Hands-on experience running an online store and maintaining content platforms, from product structure and acquisition to everyday operations.',
     skills: ['Shopify', 'WooCommerce', 'E-commerce operations', 'SEO', 'Digital campaigns', 'Content management'],
   },
 ];
@@ -121,6 +121,6 @@ export const experienceItems: ExperienceItem[] = [
   {
     period: 'Current Focus',
     title: 'Web Development & Automation',
-    description: 'Developing custom WordPress platforms, reliable Python publishing tools and human-led AI workflows, with requirements, implementation review and evidence-based acceptance.',
+    description: 'Developing web platforms, automation tools and system integrations, with a focus on data integrity, diagnostics, testing and controlled releases.',
   },
 ];

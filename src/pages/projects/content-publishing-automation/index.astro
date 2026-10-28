@@ -25,6 +25,7 @@ const sections = [
     paragraphs: [
       'The Meta Graph API adapter supports scheduled-content operations and readback. Publication intent is stored before an external request, while confirmation and local state updates are handled as separate steps.',
       'When a response is ambiguous, the workflow calls for reconciliation rather than an unconditional retry. Cancellation also requires verification of the external result. These are safeguards for specific operations, not a universal exactly-once guarantee.',
+      'Recovery tests use a simulated publisher to interrupt the process after a request may have succeeded but before confirmation is saved. The next attempt requires reconciliation instead of sending the request again. A separate test fails the manifest write after confirmation is stored; restarting recovers the confirmed state without a second publication request.',
       'Diagnostic checks separate credential, permission and identity problems, with sensitive values excluded from user-facing error messages.',
     ],
   },

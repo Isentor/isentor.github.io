@@ -34,8 +34,8 @@ const readAuthoredSource = async (directory) => {
 const authoredSource = (await readAuthoredSource(projectDirectory)).join('\n');
 assert.doesNotMatch(authoredSource, /[\u2013\u2014]/, 'authored source must use only ASCII hyphens');
 
-const homepageTitle = 'Maurycy Pytel | Data, Software & Web Development';
-const homepageDescription = 'Portfolio of Maurycy Pytel - web development, Python automation, data, e-commerce and digital projects.';
+const homepageTitle = 'Maurycy Pytel | Web Development & Automation';
+const homepageDescription = 'Portfolio of Maurycy Pytel - WordPress platforms, Python automation and system integration, informed by e-commerce, analytics and digital operations.';
 const homepageIds = ['main-content', 'projects', 'expertise', 'experience', 'about', 'contact'];
 const homepageText = [
   'Maurycy Pytel',
