@@ -17,7 +17,7 @@ const caseStudy = await readFile(new URL('projects/tawerna-gothic/index.html', d
 const generatedPages = await Promise.all(htmlFiles.map((file) => readFile(new URL(file, distDirectory), 'utf8')));
 const generatedHtml = generatedPages.join('\n');
 
-const ignoredSourceDirectories = new Set(['.git', '.superpowers', 'dist', 'node_modules']);
+const ignoredSourceDirectories = new Set(['.git', '.superpowers', '.astro', 'dist', 'node_modules', 'qa']);
 const sourceExtension = /\.(?:astro|css|js|json|md|mjs|ts|tsx|ya?ml)$/;
 const readAuthoredSource = async (directory) => {
   const entries = await readdir(directory, { withFileTypes: true });
@@ -47,6 +47,7 @@ const homepageText = [
   'Experience',
   'About',
   "Let's build something useful.",
+  "I'm open to conversations about technical roles, digital projects and practical collaborations.",
 ];
 const contactLinks = [
   'https://github.com/Isentor',
@@ -77,7 +78,8 @@ assert.match(homepage, /<a\b[^>]*href="\/projects\/tawerna-gothic\/"[^>]*>\s*Vie
 for (const slug of ['grytycy', 'content-publishing-automation']) {
   assert.match(homepage, new RegExp(`<a\\b[^>]*href="/projects/${slug}/"[^>]*>\\s*View case study\\s*</a>`), `${slug} must expose an active case study CTA`);
 }
-assert.match(homepage, /class="hero-showcase" aria-hidden="true"/, 'decorative homepage hero must be hidden from assistive technology');
+assert.equal((homepage.match(/data-recovery(?=[\s>])/g) ?? []).length, 1, 'homepage must include one recovery demonstration');
+assert.match(homepage, /<main\b[^>]*id="main-content"[^>]*tabindex="-1"/, 'skip-link target must accept focus');
 
 const tawernaHomepageLink = (homepage.match(/<a\b[^>]*href="https:\/\/tawerna-gothic\.pl"[^>]*>[\s\S]*?<\/a>/) ?? [])[0] ?? '';
 assert.ok(tawernaHomepageLink.includes('Visit live site'), 'Tawerna Gothic homepage card must retain its live CTA');
@@ -85,15 +87,21 @@ assert.ok(tawernaHomepageLink.includes('target="_blank"'), 'Tawerna Gothic homep
 assert.ok(tawernaHomepageLink.includes('rel="noopener noreferrer"'), 'Tawerna Gothic homepage live CTA must protect opener context');
 
 const homepageImages = homepage.match(/<img\b[^>]*>/g) ?? [];
-const homepageProjectImage = homepageImages.find((tag) => tag.includes('/projects/tawerna-gothic/homepage-desktop.webp')) ?? '';
-assert.ok(homepageProjectImage.includes('alt="Screenshot of the Tawerna Gothic homepage"'), 'homepage project screenshot must have meaningful alt text');
-assert.ok(homepageProjectImage.includes('loading="lazy"'), 'homepage project screenshot must be lazy loaded');
-assert.ok(homepageProjectImage.includes('decoding="async"'), 'homepage project screenshot must decode asynchronously');
-assert.match(homepageProjectImage, /\bwidth="1440"/, 'homepage project screenshot must declare width');
-assert.match(homepageProjectImage, /\bheight="900"/, 'homepage project screenshot must declare height');
+for (const name of ['grytycy-desktop', 'grytycy-mobile', 'map', 'map-mobile', 'lockpicker']) {
+  const source = '/projects/portfolio-v2/' + name + '.webp';
+  assert.ok(homepage.includes(source), 'homepage must expose V2 evidence ' + name);
+  assert.ok((await readFile(new URL('.' + source, distDirectory))).byteLength > 0, 'V2 asset must be present in the build');
+}
+assert.ok(homepage.includes('Kamil Cieślik'), 'Lockpicker solver attribution must remain visible');
+assert.match(homepage, /<h1 id="opening">Maurycy Pytel<\/h1>/, 'the hero must introduce Maurycy by name');
+for (const state of ['Intent saved', 'Result unknown', 'State check', 'Verified']) {
+  assert.ok(homepage.includes(state), 'recovery state must be present: ' + state);
+}
 
 const homepageHeroImage = homepageImages.find((tag) => tag.includes('/projects/tawerna-gothic/hero-crop.webp')) ?? '';
-assert.ok(homepageHeroImage.includes('alt=""'), 'decorative homepage hero screenshot must have empty alt text');
+assert.match(homepageHeroImage, /alt="[^"]+"/, 'homepage proof image must have meaningful alt text');
+assert.match(homepageHeroImage, /width="1000" height="700"/, 'hero image must reserve its natural dimensions');
+assert.ok(homepageHeroImage.includes('decoding="async"'), 'hero image must decode asynchronously');
 assert.ok(homepageHeroImage.includes('fetchpriority="high"'), 'homepage hero screenshot must receive high fetch priority');
 assert.ok(!homepageHeroImage.includes('loading="lazy"'), 'homepage hero screenshot must not be lazy loaded');
 

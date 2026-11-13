@@ -1,68 +1,198 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import About from '../components/About.astro';
-import Contact from '../components/Contact.astro';
-import Expertise from '../components/Expertise.astro';
-import ExperienceTimeline from '../components/ExperienceTimeline.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import Hero from '../components/Hero.astro';
-import ProjectShowcase from '../components/ProjectShowcase.astro';
-import { expertiseAreas, experienceItems, projects } from '../data/portfolio';
+import RecoveryDemo from '../components/RecoveryDemo.astro';
+import { expertiseAreas, experienceItems, externalLinks, projects } from '../data/portfolio';
+import '../styles/premium-home.css';
 
 const title = 'Maurycy Pytel | Web Development & Automation';
 const description = 'Portfolio of Maurycy Pytel - WordPress platforms, Python automation and system integration, informed by e-commerce, analytics and digital operations.';
 const canonical = 'https://isentor.github.io/';
+function getProject(caseStudyUrl: string) {
+  const project = projects.find(item => item.caseStudyUrl === caseStudyUrl);
+  if (!project) throw new Error('Missing portfolio project: ' + caseStudyUrl);
+  return project;
+}
+
+const tawerna = getProject('/projects/tawerna-gothic/');
+const grytycy = getProject('/projects/grytycy/');
+const publishing = getProject('/projects/content-publishing-automation/');
+const sections = ['Projects', 'Expertise', 'Experience', 'About', 'Contact'];
 ---
 
 <BaseLayout {title} {description} {canonical}>
-  <Header />
-  <main id="main-content">
-    <Hero />
-
-    <section id="projects" class="projects light-section section-shell">
-      <div class="container">
-        <div class="section-heading projects-heading" data-reveal>
-          <span class="micro-label">SELECTED WORK</span>
-          <h2>Selected Projects</h2>
-          <p>A selection of public and private work spanning web platforms, automation and practical digital systems.</p>
-        </div>
-
-        <div class="project-list">
-          {projects.map((project, index) => <ProjectShowcase {project} {index} />)}
-        </div>
+  <div class="premium-home" id="top">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="premium-header">
+      <div class="premium-wrap premium-nav">
+        <a class="premium-brand" href="#top">Maurycy Pytel</a>
+        <nav aria-label="Primary navigation">
+          {sections.map(section => <a href={`#${section.toLowerCase()}`}>{section}</a>)}
+        </nav>
       </div>
-    </section>
+    </header>
 
-    <Expertise areas={expertiseAreas} />
-    <ExperienceTimeline items={experienceItems} />
-    <About />
-    <Contact />
-  </main>
-  <Footer />
+    <main id="main-content" tabindex="-1">
+      <section class="premium-wrap premium-hero" aria-labelledby="opening">
+        <div class="premium-hero-copy">
+          <h1 id="opening">Maurycy Pytel</h1>
+          <p class="premium-hero-specialty">WordPress platforms. Python automation.</p>
+          <p class="premium-lead">I rebuild sites with large archives and write tools that check what happened when a publishing request times out.</p>
+          <p class="premium-support">My background is in e-commerce, analytics and digital operations.</p>
+          <div class="premium-actions">
+            <a class="premium-button" href="#projects">View projects</a>
+            <a class="premium-link" href="#contact">Get in touch</a>
+          </div>
+        </div>
+        <figure class="premium-hero-figure">
+          <figcaption><strong>Tawerna Gothic</strong><span>Live WordPress platform</span></figcaption>
+          <img src="/projects/tawerna-gothic/hero-crop.webp" width="1000" height="700" alt="Tawerna Gothic homepage with a Gothic-themed masthead and an editorial news grid" decoding="async" fetchpriority="high" />
+        </figure>
+      </section>
+
+      <section id="projects" class="premium-projects premium-wrap" aria-labelledby="projects-title">
+        <h2 id="projects-title">Selected Projects</h2>
+        <ul class="premium-project-index">
+          <li><a href="#tawerna"><strong>{tawerna.name}</strong><span>1,017 posts migrated</span></a></li>
+          <li><a href="#grytycy"><strong>{grytycy.name}</strong><span>Staged WordPress rollout</span></a></li>
+          <li><a href="#publishing"><strong>{publishing.name}</strong><span>One controlled live test</span></a></li>
+        </ul>
+
+        <article id="tawerna" class="premium-project premium-tawerna" aria-labelledby="tawerna-title">
+          <div class="premium-project-copy">
+            <p class="premium-kicker">Web platform</p>
+            <h3 id="tawerna-title">{tawerna.name}</h3>
+            <p>I started the site in 2005. The WordPress rebuild had to preserve years of editorial work while making the archive easier to navigate.</p>
+            <p>{tawerna.details} The interactive map and browser-based lockpicking tool are public.</p>
+            <p class="premium-stack">{tawerna.technologies.join(' / ')}</p>
+            <div class="premium-actions">
+              <a class="premium-link" aria-label="View case study for Tawerna Gothic" href={tawerna.caseStudyUrl}>{tawerna.caseStudyLabel}</a>
+              <a class="premium-link" aria-label="Visit live site Tawerna Gothic" href={tawerna.liveUrl} target="_blank" rel="noopener noreferrer">{tawerna.liveLabel}</a>
+            </div>
+          </div>
+          <div class="premium-migration">
+            <p class="premium-kicker">Archive migration audit</p>
+            <dl>
+              <div><dt>Posts migrated</dt><dd>1,017</dd></div>
+              <div><dt>URLs audited</dt><dd>9,299</dd></div>
+            </dl>
+            <p>The audit found no missing migrated posts or differences in the content compared.</p>
+          </div>
+          <div class="premium-tool-gallery" role="group" aria-labelledby="tool-gallery-title">
+            <h4 id="tool-gallery-title">Tools for Gothic Remake players</h4>
+            <div class="premium-tool-grid">
+              <figure class="premium-tool-map">
+                <img src="/projects/portfolio-v2/map.webp" srcset="/projects/portfolio-v2/map-mobile.webp 640w, /projects/portfolio-v2/map.webp 1100w" sizes="(max-width: 640px) 90vw, (max-width: 1100px) 60vw, 740px" width="1100" height="653" alt="Interactive world map showing location markers and a panel for finding and filtering places" loading="lazy" decoding="async" />
+                <figcaption>
+                  <a class="premium-link" href="https://interactivemap.tawerna-gothic.pl/">Interactive Map</a>
+                  <p>Production capture. Search and filters help players find locations. Map artwork and icons are from Gothic Remake.</p>
+                </figcaption>
+              </figure>
+              <figure class="premium-tool-lockpicker">
+                <img src="/projects/portfolio-v2/lockpicker.webp" width="390" height="844" alt="Lockpicker showing a solved lock with four moves, three steps and a pin preview" loading="lazy" decoding="async" />
+                <figcaption>
+                  <a class="premium-link" href="https://lockpicker.tawerna-gothic.pl/">Lockpicker</a>
+                  <p>Local demonstration of the solution view. Solver by Kamil Cieślik (MIT).</p>
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+        </article>
+
+        <article id="grytycy" class="premium-project premium-grytycy" aria-labelledby="grytycy-title">
+          <div class="premium-project-copy">
+            <p class="premium-kicker">Web architecture</p>
+            <h3 id="grytycy-title">{grytycy.name}</h3>
+            <p>{grytycy.description}</p>
+            <p>I directed the rebuild and put the article model and legacy routes in place ahead of the new homepage.</p>
+            <p class="premium-stack">{grytycy.technologies.join(' / ')}</p>
+            <div class="premium-actions">
+              <a class="premium-link" aria-label="View case study for Grytycy.pl" href={grytycy.caseStudyUrl}>{grytycy.caseStudyLabel}</a>
+              <a class="premium-link" aria-label="Visit live site Grytycy.pl" href={grytycy.liveUrl} target="_blank" rel="noopener noreferrer">{grytycy.liveLabel}</a>
+            </div>
+          </div>
+          <div class="premium-rollout">
+            <h4>What shipped</h4>
+            <ul>
+              <li><strong>Content migration</strong><span>451 accepted entries migrated in the checked set.</span></li>
+              <li><strong>Public frontend</strong><span>Editorial homepage, global search, hubs and article templates live.</span></li>
+              <li><strong>Metadata release</strong><span>Route checks and a separate release for search and social metadata.</span></li>
+            </ul>
+          </div>
+          <figure class="premium-grytycy-figure">
+            <picture>
+              <source media="(max-width: 640px)" srcset="/projects/portfolio-v2/grytycy-mobile.webp" width="390" height="844" />
+              <img src="/projects/portfolio-v2/grytycy-desktop.webp" width="1440" height="900" alt="Grytycy.pl homepage with the editorial lead story, navigation, search and earlier articles" loading="lazy" decoding="async" />
+            </picture>
+            <figcaption>Grytycy.pl homepage, production capture</figcaption>
+          </figure>
+        </article>
+
+        <article id="publishing" class="premium-project premium-publishing" aria-labelledby="publishing-title">
+          <div class="premium-project-copy">
+            <p class="premium-kicker">Software &amp; automation</p>
+            <h3 id="publishing-title">{publishing.name}</h3>
+            <p>{publishing.description}</p>
+            <p>I defined what the workflow must verify and reviewed the recovery behavior. One controlled test confirmed public delivery. Routine production use remains blocked.</p>
+            <p class="premium-stack">{publishing.technologies.join(' / ')}</p>
+            <a class="premium-link" aria-label="View case study for Content Publishing Automation" href={publishing.caseStudyUrl}>{publishing.caseStudyLabel}</a>
+          </div>
+          <RecoveryDemo />
+        </article>
+      </section>
+
+      <section id="expertise" class="premium-expertise" aria-labelledby="expertise-title">
+        <div class="premium-wrap premium-expertise-layout">
+          <h2 id="expertise-title">What I Do</h2>
+          <div class="premium-competences">
+            {expertiseAreas.map(area => (
+              <div>
+                <h3>{area.title}</h3>
+                <p>{area.summary}</p>
+                <ul class="premium-skill-list" role="list">{area.skills.map(skill => <li>{skill}</li>)}</ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="experience" class="premium-wrap premium-background" aria-labelledby="experience-title">
+        <div>
+          <h2 id="experience-title">Experience</h2>
+          <p class="premium-lead">Running a store and working with sales and inventory data shaped how I approach migrations, publishing and release checks.</p>
+        </div>
+        <ol class="premium-timeline">
+          {experienceItems.map(item => (
+            <li><p class="premium-period">{item.period}</p><div><h3>{item.title}</h3><p>{item.description}</p></div></li>
+          ))}
+        </ol>
+      </section>
+
+      <section id="about" class="premium-wrap premium-background premium-about" aria-labelledby="about-title">
+        <h2 id="about-title">About</h2>
+        <div>
+          <p class="premium-about-lead">Running a store and working with content archives taught me to pay attention to what a change might break.</p>
+          <p>I set requirements, make technical decisions and help implement them. I check changes through tests, by reading back the result and by releasing in stages. I use Codex and Claude for analysis, coding, testing and documentation, and I decide when the work is ready.</p>
+          <p>I also test speech recognition, caption alignment and layouts for vertical video. I studied Business Psychology at SWPS, which shapes how I think about communication and how people use digital products.</p>
+        </div>
+      </section>
+
+      <section id="contact" class="premium-contact" aria-labelledby="contact-title">
+        <div class="premium-wrap premium-contact-layout">
+          <div class="premium-contact-copy">
+            <p class="premium-contact-label">Contact</p>
+            <h2 id="contact-title">Let's build something useful.</h2>
+            <p class="premium-contact-invitation">I'm open to conversations about technical roles, digital projects and practical collaborations.</p>
+          </div>
+          <div class="premium-contact-actions">
+            <a class="premium-contact-email" href={externalLinks.emailHref}>{externalLinks.email}</a>
+            <ul role="list">
+              <li><a href={externalLinks.github}>GitHub</a></li>
+              <li><a href={externalLinks.linkedin}>LinkedIn</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="premium-footer"><div class="premium-wrap"><span>Maurycy Pytel</span><a href="#top">Back to top ↑</a></div></footer>
+  </div>
 </BaseLayout>
-
-<script>
-  const revealElements = document.querySelectorAll<HTMLElement>('[data-reveal]');
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  document.documentElement.classList.add('has-js');
-
-  if (!prefersReducedMotion && 'IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { rootMargin: '0px 0px -8% 0px', threshold: 0.12 },
-    );
-
-    revealElements.forEach((element) => observer.observe(element));
-  } else {
-    revealElements.forEach((element) => element.classList.add('is-visible'));
-  }
-</script>

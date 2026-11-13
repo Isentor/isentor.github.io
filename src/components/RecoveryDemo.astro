@@ -1,0 +1,75 @@
+---
+const steps = [
+  {
+    title: 'Intent saved',
+    detail: 'Record a request to publish the fictional release note before sending it.',
+    status: 'Intent saved. The release note is ready to send.',
+    action: 'Send request',
+  },
+  {
+    title: 'Result unknown',
+    detail: 'The request times out. Keep the original intent while the result is unknown.',
+    status: 'No clear response. The original request may have succeeded.',
+    action: 'Check external state',
+  },
+  {
+    title: 'State check',
+    detail: 'Look up the original operation in the simulated external system.',
+    status: 'Checking the external state for the original operation.',
+    action: 'Read result',
+  },
+  {
+    title: 'Verified',
+    detail: 'The lookup finds the release note. Record delivery and skip a second write.',
+    status: 'Delivery confirmed. No second write was sent.',
+    action: 'Run again',
+  },
+];
+---
+
+<section class="premium-demo" data-recovery aria-labelledby="recovery-title">
+  <header>
+    <h4 id="recovery-title">Did the write go through?</h4>
+    <p>Fictional publishing request. Check the recorded operation before retrying.</p>
+  </header>
+  <ol role="list">
+    {steps.map(step => (
+      <li data-status={step.status} data-action={step.action}>
+        <div class="premium-state-title"><strong>{step.title}</strong></div>
+        <span class="premium-state-detail">{step.detail}</span>
+      </li>
+    ))}
+  </ol>
+  <div class="premium-demo-controls" hidden>
+    <p role="status">Ready to simulate a publishing request.</p>
+    <button type="button">Save intent</button>
+  </div>
+</section>
+
+<script>
+  const demo = document.querySelector<HTMLElement>('[data-recovery]');
+  const controls = demo?.querySelector<HTMLElement>('.premium-demo-controls');
+  const trigger = controls?.querySelector<HTMLButtonElement>('button');
+  const status = controls?.querySelector<HTMLElement>('[role="status"]');
+  const steps = [...(demo?.querySelectorAll<HTMLLIElement>('li') ?? [])];
+
+  if (controls && trigger && status && steps.length) {
+    const readyMessage = status.textContent;
+    const firstAction = trigger.textContent;
+    let current = -1;
+
+    trigger.addEventListener('click', () => {
+      current = current === steps.length - 1 ? -1 : current + 1;
+      steps.forEach((step, index) => {
+        step.toggleAttribute('data-complete', index < current);
+        if (index === current) step.setAttribute('aria-current', 'step');
+        else step.removeAttribute('aria-current');
+      });
+      const step = steps[current];
+      status.textContent = step?.dataset.status ?? readyMessage;
+      trigger.textContent = step?.dataset.action ?? firstAction;
+    });
+
+    controls.hidden = false;
+  }
+</script>
