@@ -1,7 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../Header.astro';
-import Footer from '../Footer.astro';
 import '../../styles/case-study.css';
 
 interface Section {
@@ -20,16 +18,16 @@ interface Props {
   lead: string;
   stack: string;
   status: string;
+  statusAsOf: string;
   sections: Section[];
 }
 
-const { title, description, canonical, category, headline, lead, stack, status, sections } = Astro.props;
+const { title, description, canonical, category, headline, lead, stack, status, statusAsOf, sections } = Astro.props;
 ---
 
 <BaseLayout title={`${title} Case Study | Maurycy Pytel`} {description} {canonical}>
-  <Header />
-  <main id="main-content" class="case-study-page cs-focused-page">
-    <section class="cs-hero cs-text-hero dark-section" aria-labelledby="project-title">
+  <main id="main-content" tabindex="-1" class="case-study-page cs-focused-page">
+    <section class:list={['cs-hero', 'light-section', { 'cs-text-hero': !Astro.slots.has('visual') }]} aria-labelledby="project-title">
       <div class="container cs-hero-grid">
         <div class="cs-hero-copy">
           <span class="micro-label">{category} / CASE STUDY</span>
@@ -39,14 +37,15 @@ const { title, description, canonical, category, headline, lead, stack, status, 
           <dl class="cs-hero-meta">
             <div><dt>Role</dt><dd>Technical Owner &amp; Product Lead</dd></div>
             <div><dt>Stack</dt><dd>{stack}</dd></div>
-            <div><dt>Status / October 2026</dt><dd>{status}</dd></div>
+            <div><dt>Status / {statusAsOf}</dt><dd>{status}</dd></div>
           </dl>
-          <div class="cs-actions"><a class="button button-secondary" href="/#projects">Back to projects</a></div>
+          <div class="cs-actions"><a class="premium-link" href="/#projects">Back to projects</a></div>
         </div>
+        <slot name="visual" />
       </div>
     </section>
     {sections.map((section, index) => (
-      <section class:list={['cs-section', 'light-section', { 'cs-section-neutral': index % 2 === 1 }]} aria-labelledby={`section-${index}`}>
+      <section class:list={['cs-section', 'cs-focused-section', 'light-section', { 'cs-section-neutral': index % 2 === 1 }]} aria-labelledby={`section-${index}`}>
         <div class="container cs-foundation-layout">
           <div class="cs-section-heading">
             <span class="micro-label">{section.label}</span>
@@ -63,9 +62,8 @@ const { title, description, canonical, category, headline, lead, stack, status, 
       <div class="container">
         <span class="micro-label">MORE WORK</span>
         <h2 id="next-project-heading">Explore the other projects.</h2>
-        <div class="cs-actions"><a class="button button-primary" href="/#projects">Back to projects</a></div>
+        <div class="cs-actions"><a class="premium-button premium-button-amber" href="/#projects">Back to projects</a></div>
       </div>
     </section>
   </main>
-  <Footer />
 </BaseLayout>

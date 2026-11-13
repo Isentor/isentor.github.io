@@ -1,7 +1,5 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import Footer from '../../../components/Footer.astro';
-import Header from '../../../components/Header.astro';
 import CaseStudyGallery from '../../../components/case-study/CaseStudyGallery.astro';
 import CaseStudyHero from '../../../components/case-study/CaseStudyHero.astro';
 import CaseStudyMetrics from '../../../components/case-study/CaseStudyMetrics.astro';
@@ -35,8 +33,7 @@ import '../../../styles/case-study.css';
 ---
 
 <BaseLayout title={caseStudySeo.title} description={caseStudySeo.description} canonical={caseStudySeo.canonical}>
-  <Header />
-  <main id="main-content" class="case-study-page">
+  <main id="main-content" tabindex="-1" class="case-study-page">
     <CaseStudyHero {hero} />
 
     <section class="cs-section cs-overview light-section" aria-label="Project overview and role">
@@ -303,11 +300,10 @@ import '../../../styles/case-study.css';
         <span class="micro-label">TAWERNA GOTHIC</span>
         <h2 id="final-cta-heading">Explore the live platform.</h2>
         <div class="cs-actions">
-          <a class="button button-primary" href="https://tawerna-gothic.pl" target="_blank" rel="noopener noreferrer">Visit Tawerna Gothic</a>
-          <a class="button button-secondary" href="/#projects">Back to projects</a>
+          <a class="premium-button premium-button-amber" href="https://tawerna-gothic.pl" target="_blank" rel="noopener noreferrer">Visit Tawerna Gothic</a>
+          <a class="premium-link" href="/#projects">Back to projects</a>
         </div>
       </div>
     </section>
   </main>
-  <Footer />
 </BaseLayout>

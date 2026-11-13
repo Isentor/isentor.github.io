@@ -1,76 +1,14 @@
 ---
-import { externalLinks } from '../data/portfolio';
-
 const isHomepage = Astro.url.pathname === '/';
-const sectionPrefix = isHomepage ? '' : '/';
-const sectionLinks = [
-  { label: 'Projects', href: `${sectionPrefix}#projects` },
-  { label: 'Expertise', href: `${sectionPrefix}#expertise` },
-  { label: 'Experience', href: `${sectionPrefix}#experience` },
-  { label: 'About', href: `${sectionPrefix}#about` },
-  { label: 'Contact', href: `${sectionPrefix}#contact` },
-];
+const sections = ['Projects', 'Expertise', 'Experience', 'About', 'Contact'];
 ---
 
 <a class="skip-link" href="#main-content">Skip to content</a>
-
-<header class="site-header" data-site-header>
-  <div class="container nav-shell">
-    <a class="brand" href={isHomepage ? '#top' : '/'} aria-label={isHomepage ? 'Maurycy Pytel - back to top' : 'Maurycy Pytel - homepage'}>Maurycy Pytel</a>
-
-    <button
-      class="nav-toggle"
-      type="button"
-      aria-expanded="false"
-      aria-controls="primary-navigation"
-      aria-label="Open navigation"
-      hidden
-      data-nav-toggle
-    >
-      <span></span>
-      <span></span>
-    </button>
-
-    <nav id="primary-navigation" class="primary-navigation" aria-label="Primary navigation" data-primary-navigation>
-      <div class="section-navigation">
-        {sectionLinks.map((link) => <a href={link.href}>{link.label}</a>)}
-      </div>
-      <div class="profile-navigation">
-        <a href={externalLinks.github} target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href={externalLinks.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      </div>
+<header class="premium-header">
+  <div class="premium-wrap premium-nav">
+    <a class="premium-brand" href={isHomepage ? '#top' : '/'}>Maurycy Pytel</a>
+    <nav aria-label="Primary navigation">
+      {sections.map(section => <a href={`${isHomepage ? '' : '/'}#${section.toLowerCase()}`}>{section}</a>)}
     </nav>
   </div>
 </header>
-
-<script>
-  const header = document.querySelector<HTMLElement>('[data-site-header]');
-  const toggle = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');
-  const navigation = document.querySelector<HTMLElement>('[data-primary-navigation]');
-
-  if (header && toggle && navigation) {
-    toggle.hidden = false;
-    header.dataset.menuReady = 'true';
-
-    const setMenuState = (open: boolean) => {
-      header.dataset.menuOpen = String(open);
-      toggle.setAttribute('aria-expanded', String(open));
-      toggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
-    };
-
-    toggle.addEventListener('click', () => {
-      setMenuState(toggle.getAttribute('aria-expanded') !== 'true');
-    });
-
-    navigation.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => setMenuState(false));
-    });
-
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
-        setMenuState(false);
-        toggle.focus();
-      }
-    });
-  }
-</script>

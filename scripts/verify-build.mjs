@@ -17,6 +17,14 @@ const caseStudy = await readFile(new URL('projects/tawerna-gothic/index.html', d
 const generatedPages = await Promise.all(htmlFiles.map((file) => readFile(new URL(file, distDirectory), 'utf8')));
 const generatedHtml = generatedPages.join('\n');
 
+for (const route of ['projects/grytycy/index.html', 'projects/content-publishing-automation/index.html']) {
+  const html = generatedPages[htmlFiles.indexOf(route)];
+  assert.match(html, /<dt>Status \/ November 2026<\/dt>/, `${route} must show the reviewed status date`);
+}
+const grytycyCaseStudy = generatedPages[htmlFiles.indexOf('projects/grytycy/index.html')];
+assert.ok(grytycyCaseStudy.includes('A validated content model behind a live editorial homepage.'), 'Grytycy must describe the deployed editorial homepage');
+
+
 const ignoredSourceDirectories = new Set(['.git', '.superpowers', '.astro', 'dist', 'node_modules', 'qa']);
 const sourceExtension = /\.(?:astro|css|js|json|md|mjs|ts|tsx|ya?ml)$/;
 const readAuthoredSource = async (directory) => {
@@ -236,7 +244,7 @@ assert.equal(
 for (const href of ['/#projects', '/#expertise', '/#experience', '/#about', '/#contact']) {
   assert.ok(caseStudy.includes(`href="${href}"`), `case study header must link to ${href}`);
 }
-assert.ok(caseStudy.includes('class="brand" href="/"'), 'case study brand must link to the homepage');
+assert.ok(caseStudy.includes('class="premium-brand" href="/"'), 'case study brand must link to the homepage');
 assert.ok(caseStudy.includes('class="skip-link" href="#main-content"'), 'case study skip link must remain local');
 assert.ok(caseStudy.includes('href="https://tawerna-gothic.pl"'), 'case study must link to the live project');
 assert.ok(caseStudy.includes('href="/#projects"'), 'case study must link back to projects');
@@ -269,6 +277,10 @@ for (const [index, html] of generatedPages.entries()) {
   const route = htmlFiles[index];
   assert.equal((html.match(/<h1(?:\s|>)/g) ?? []).length, 1, `${route} must contain exactly one h1`);
   assert.match(html, /<main\b[^>]*id="main-content"/, `${route} must expose the skip-link target`);
+  assert.match(html, /<header class="premium-header">/, `${route} must use the shared V3 header`);
+  assert.match(html, /<footer class="premium-footer">/, `${route} must use the shared V3 footer`);
+  assert.match(html, /<main\b[^>]*id="main-content"[^>]*tabindex="-1"/, `${route} must expose a focusable skip link target`);
+  assert.doesNotMatch(html, /class="(?:site-header|site-footer|nav-toggle)"/, `${route} must not render legacy navigation`);
   const canonicalPath = route === 'index.html' ? '/' : `/${route.replace(/index\.html$/, '')}`;
   assert.ok(html.includes(`rel="canonical" href="https://isentor.github.io${canonicalPath}"`), `${route} must have its own canonical`);
   for (const match of html.matchAll(/href="(\/[^"?#]*)(?:[?#][^"]*)?"/g)) {

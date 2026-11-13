@@ -4,30 +4,17 @@
 }
 
 .case-study-page .cs-hero {
-  position: relative;
-  min-height: min(1050px, 100svh);
-  display: grid;
-  align-items: center;
-  padding-top: var(--header-height);
-  overflow: hidden;
-  border-bottom: 1px solid var(--line-dark);
-}
-
-.case-study-page .cs-hero::before {
-  position: absolute;
-  inset: var(--header-height) 0 0 55%;
-  border-left: 1px solid rgba(196, 154, 88, 0.14);
-  background: #121310;
-  content: '';
+  background: var(--paper);
+  color: var(--graphite);
+  border-bottom: 1px solid var(--rule);
 }
 
 .case-study-page .cs-hero-grid {
-  position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 0.84fr) minmax(500px, 1.16fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: center;
-  gap: clamp(3rem, 6vw, 7rem);
-  padding-block: clamp(5rem, 8vw, 8rem);
+  gap: clamp(1.75rem, 5vw, 5rem);
+  padding-block: clamp(2.5rem, 6vw, 5.5rem);
 }
 
 .case-study-page .cs-hero-copy,
@@ -43,10 +30,6 @@
 
 .case-study-page .cs-text-hero .cs-hero-grid {
   grid-template-columns: minmax(0, 1fr);
-}
-
-.case-study-page .cs-text-hero::before {
-  display: none;
 }
 
 .case-study-page .cs-text-hero h1 {
@@ -65,19 +48,20 @@
 }
 
 .case-study-page .cs-hero h1 {
-  margin: 1.4rem 0 1.1rem;
-  color: var(--text-light);
+  margin: .65rem 0 1rem;
+  color: var(--graphite);
   font-family: var(--serif);
-  font-size: clamp(4rem, 7.2vw, 7rem);
+  font-size: clamp(2.75rem, 6.35vw, 6rem);
   font-weight: 400;
   letter-spacing: -0.065em;
-  line-height: 0.9;
+  line-height: .97;
+  text-wrap: balance;
 }
 
 .case-study-page .cs-hero-headline {
-  max-width: 18ch;
+  max-width: 32ch;
   margin-bottom: 1.5rem;
-  color: var(--accent);
+  color: var(--green);
   font-family: var(--serif);
   font-size: clamp(1.55rem, 2.6vw, 2.45rem);
   line-height: 1.12;
@@ -86,7 +70,7 @@
 .case-study-page .cs-hero-lead {
   max-width: 640px;
   margin-bottom: 2rem;
-  color: var(--muted-light);
+  color: var(--soft-ink);
   font-size: clamp(1rem, 1.25vw, 1.12rem);
 }
 
@@ -96,14 +80,13 @@
   gap: 1.25rem 2rem;
   margin: 0 0 2.3rem;
   padding-top: 1.5rem;
-  border-top: 1px solid var(--line-dark);
+  border-top: 1px solid var(--rule);
 }
 
 .case-study-page .cs-hero-meta div:nth-child(2) {
   grid-column: span 2;
 }
 
-.case-study-page .cs-hero-meta dt,
 .case-study-page .cs-diagram-label,
 .case-study-page .cs-timeline-period,
 .case-study-page .cs-challenge-number {
@@ -117,7 +100,7 @@
 
 .case-study-page .cs-hero-meta dd {
   margin: 0.25rem 0 0;
-  color: var(--text-light);
+  color: var(--graphite);
   font-size: 0.88rem;
   line-height: 1.45;
 }
@@ -126,10 +109,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.8rem;
-}
-
-.case-study-page .cs-actions .button {
-  min-height: 50px;
 }
 
 .case-study-page .cs-hero-visual {
@@ -141,35 +120,9 @@
   border: 1px solid var(--line-dark);
   background: var(--dark-soft);
   box-shadow: var(--shadow);
-  transform: translateX(4%);
-}
-
-.case-study-page .cs-browser-bar {
-  height: 44px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding-inline: 1rem;
-  border-bottom: 1px solid var(--line-dark);
-}
-
-.case-study-page .cs-browser-bar span {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #5f6058;
-}
-
-.case-study-page .cs-browser-bar span:first-child {
-  background: var(--accent);
-}
-
-.case-study-page .cs-browser-bar i {
-  width: min(44%, 220px);
-  height: 7px;
-  margin-left: auto;
-  border-radius: 999px;
-  background: rgba(241, 237, 229, 0.1);
+  border-radius: .4rem;
+  margin: 0;
+  padding: .7rem;
 }
 
 .case-study-page .cs-browser-frame img {
@@ -179,8 +132,7 @@
 }
 
 .case-study-page .cs-section {
-  padding-block: clamp(6rem, 10vw, 9rem);
-  scroll-margin-top: var(--header-height);
+  padding-block: var(--section-space);
 }
 
 .case-study-page .cs-section-neutral {
@@ -193,7 +145,7 @@
 
 .case-study-page .cs-section-heading {
   max-width: 850px;
-  margin-bottom: clamp(3rem, 6vw, 5rem);
+  margin-bottom: clamp(1.2rem, 3vw, 2.65rem);
 }
 
 .case-study-page .cs-section-heading h2,
@@ -201,7 +153,7 @@
 .case-study-page .cs-final-cta h2 {
   margin: 1.15rem 0 1.35rem;
   font-family: var(--serif);
-  font-size: clamp(3rem, 6vw, 5.7rem);
+  font-size: var(--heading-size);
   font-weight: 400;
   letter-spacing: -0.055em;
   line-height: 0.98;
@@ -211,7 +163,7 @@
 .case-study-page .cs-two-column p,
 .case-study-page .cs-supporting-copy p,
 .case-study-page .cs-wide-closing {
-  color: #55564f;
+  color: var(--soft-ink);
 }
 
 .case-study-page .cs-section-heading > p {
@@ -232,11 +184,11 @@
 .case-study-page .cs-two-column {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(4rem, 9vw, 9rem);
+  gap: clamp(1.75rem, 5vw, 5rem);
 }
 
 .case-study-page .cs-two-column h2 {
-  font-size: clamp(3rem, 5vw, 5rem);
+  font-size: var(--heading-size);
 }
 
 .case-study-page .cs-two-column p:first-of-type {
@@ -429,7 +381,7 @@
   position: relative;
   padding: 0.9rem 0 0.9rem 1.4rem;
   border-bottom: 1px solid var(--line-light);
-  color: #55564f;
+  color: var(--soft-ink);
 }
 
 .case-study-page .cs-editorial-list li::before {
@@ -761,8 +713,9 @@
 .case-study-page .cs-gallery-image {
   overflow: hidden;
   border: 1px solid var(--line-light);
-  background: #d8d2c7;
-  box-shadow: 0 20px 48px rgba(24, 25, 21, 0.12);
+  background: var(--light-soft);
+  border-radius: .3rem;
+  box-shadow: var(--shadow);
 }
 
 .case-study-page .cs-gallery-image img {
@@ -810,27 +763,50 @@
 }
 
 .case-study-page .cs-final-cta {
-  padding-block: clamp(7rem, 12vw, 11rem);
-  text-align: center;
+  padding-block: clamp(3.25rem, 8vw, 7rem);
 }
 
 .case-study-page .cs-final-cta h2 {
   max-width: 12ch;
-  margin: 1.2rem auto 2.5rem;
+  margin: .75rem 0 1.6rem;
   color: var(--text-light);
-  font-size: clamp(3.5rem, 8vw, 7rem);
+  font-size: clamp(2.5rem, 6.2vw, 6rem);
 }
 
 .case-study-page .cs-final-cta .cs-actions {
-  justify-content: center;
+  justify-content: flex-start;
+}
+
+.case-study-page .light-section .cs-diagram-label,
+.case-study-page .light-section .cs-challenge-number {
+  color: var(--accent-text);
+}
+
+.case-study-page .cs-hero-meta dt {
+  color: var(--green);
+  font-size: .82rem;
+  font-weight: 720;
+}
+
+.case-study-page .cs-hero-evidence figcaption {
+  padding: .6rem .25rem 0;
+  color: var(--soft-light);
+  font-size: .86rem;
+}
+
+.case-study-page .cs-focused-section .cs-foundation-layout {
+  gap: clamp(.85rem, 3vw, 3rem);
+}
+
+.case-study-page .cs-focused-section .cs-section-heading {
+  margin-bottom: 0;
+}
+
+.case-study-page .cs-section-dark .cs-platform-diagram {
+  border-radius: .35rem;
 }
 
 @media (max-width: 1080px) {
-  .case-study-page .cs-hero-grid {
-    grid-template-columns: minmax(0, 0.9fr) minmax(440px, 1.1fr);
-    gap: 3rem;
-  }
-
   .case-study-page .cs-platform-branches {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -841,17 +817,6 @@
 }
 
 @media (max-width: 900px) {
-  .case-study-page .cs-hero {
-    min-height: auto;
-  }
-
-  .case-study-page .cs-hero::before {
-    inset: auto 0 0;
-    height: 40%;
-    border-top: 1px solid rgba(196, 154, 88, 0.14);
-    border-left: 0;
-  }
-
   .case-study-page .cs-hero-grid,
   .case-study-page .cs-two-column,
   .case-study-page .cs-platform-layout,
@@ -863,8 +828,7 @@
   }
 
   .case-study-page .cs-hero-grid {
-    gap: 4rem;
-    padding-block: 6.5rem 5rem;
+    gap: 1.6rem;
   }
 
   .case-study-page .cs-hero-copy {
@@ -873,10 +837,6 @@
 
   .case-study-page .cs-hero-headline {
     max-width: 22ch;
-  }
-
-  .case-study-page .cs-browser-frame {
-    transform: none;
   }
 
   .case-study-page .cs-timeline,
@@ -917,11 +877,11 @@
 
 @media (max-width: 680px) {
   .case-study-page .cs-section {
-    padding-block: 5.5rem;
+    padding-block: var(--section-space);
   }
 
   .case-study-page .cs-hero h1 {
-    font-size: clamp(3.6rem, 18vw, 5.3rem);
+    font-size: clamp(2.55rem, 11vw, 4.25rem);
     overflow-wrap: anywhere;
   }
 
@@ -988,11 +948,6 @@
 }
 
 @media (max-width: 420px) {
-  .case-study-page .cs-actions,
-  .case-study-page .cs-actions .button {
-    width: 100%;
-  }
-
   .case-study-page .cs-metrics {
     grid-template-columns: 1fr;
   }
@@ -1033,8 +988,4 @@
     transition-duration: 0.01ms !important;
   }
 
-  .case-study-page .cs-browser-frame,
-  .case-study-page .button:hover {
-    transform: none;
-  }
 }

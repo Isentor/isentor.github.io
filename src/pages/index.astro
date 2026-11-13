@@ -16,21 +16,10 @@ function getProject(caseStudyUrl: string) {
 const tawerna = getProject('/projects/tawerna-gothic/');
 const grytycy = getProject('/projects/grytycy/');
 const publishing = getProject('/projects/content-publishing-automation/');
-const sections = ['Projects', 'Expertise', 'Experience', 'About', 'Contact'];
 ---
 
 <BaseLayout {title} {description} {canonical}>
-  <div class="premium-home" id="top">
-    <a class="skip-link" href="#main-content">Skip to content</a>
-    <header class="premium-header">
-      <div class="premium-wrap premium-nav">
-        <a class="premium-brand" href="#top">Maurycy Pytel</a>
-        <nav aria-label="Primary navigation">
-          {sections.map(section => <a href={`#${section.toLowerCase()}`}>{section}</a>)}
-        </nav>
-      </div>
-    </header>
-
+  <div class="premium-home">
     <main id="main-content" tabindex="-1">
       <section class="premium-wrap premium-hero" aria-labelledby="opening">
         <div class="premium-hero-copy">
@@ -193,6 +182,5 @@ const sections = ['Projects', 'Expertise', 'Experience', 'About', 'Contact'];
         </div>
       </section>
     </main>
-    <footer class="premium-footer"><div class="premium-wrap"><span>Maurycy Pytel</span><a href="#top">Back to top ↑</a></div></footer>
   </div>
 </BaseLayout>
