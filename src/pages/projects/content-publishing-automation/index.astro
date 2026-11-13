@@ -4,9 +4,9 @@ import FocusedCaseStudy from '../../../components/case-study/FocusedCaseStudy.as
 const sections = [
   {
     label: 'THE WORKFLOW',
-    title: 'More Than a Publishing Schedule',
+    title: 'What Happens After a Request Times Out?',
     paragraphs: [
-      'Content Publishing Automation is a modular Python application for preparing, selecting and scheduling social media content. The practical challenge is not just deciding when to publish: the system must preserve state, validate prepared files and respond safely when an external operation has an uncertain result.',
+      'Content Publishing Automation is a Python application for preparing, selecting and scheduling social media content. If a scheduling request times out, the service may already have accepted it. A second request could create a duplicate.',
       'I define the operational requirements, priorities and acceptance criteria, coordinate AI-assisted implementation, contribute to development and review the resulting behavior. The project is grounded in a real content workflow without presenting unrestricted production operation as complete.',
     ],
   },
@@ -24,18 +24,18 @@ const sections = [
     title: 'Handle Uncertainty Explicitly',
     paragraphs: [
       'The Meta Graph API adapter supports scheduled-content operations and readback. Publication intent is stored before an external request, while confirmation and local state updates are handled as separate steps.',
-      'When a response is ambiguous, the workflow calls for reconciliation rather than an unconditional retry. Cancellation also requires verification of the external result. These are safeguards for specific operations, not a universal exactly-once guarantee.',
+      'An ambiguous response leaves a recorded operation for reconciliation. Cancellation also requires external verification before the local state changes.',
       'Recovery tests use a simulated publisher to interrupt the process after a request may have succeeded but before confirmation is saved. The next attempt requires reconciliation instead of sending the request again. A separate test fails the manifest write after confirmation is stored; restarting recovers the confirmed state without a second publication request.',
       'Diagnostic checks separate credential, permission and identity problems, with sensitive values excluded from user-facing error messages.',
     ],
   },
   {
-    label: 'QUALITY AND STATUS / OCTOBER 2026',
-    title: 'Implemented Core, Further Work in Progress',
+    label: 'QUALITY AND STATUS / NOVEMBER 2026',
+    title: 'Offline Verification and a Controlled Live Test',
     paragraphs: [
-      'The core CLI, storage, package preparation, API adapter and recovery paths are implemented. The test suite includes contract checks, transport failures and crash/restart scenarios. Their presence is not presented as a fresh pass of every test or proof of continuous production service.',
-      'A separate credential-management component is in development. Immutable contracts and a canonical semantic codec are implemented, with byte-exact test vectors; the complete credential-management service and desktop interface are not finished.',
-      'The project does not claim unrestricted production readiness, continuous automatic publishing or a deployed desktop application.',
+      'Offline tests exercise the CLI with simulated API failures and a test SQLite database. The workflow can restore a confirmed local state after a restart without sending the publication request again.',
+      'The current executor uses the Windows credential store. A broader credential-management design produced immutable contracts and a byte-exact codec, while the separate service and desktop interface remain unfinished.',
+      'In one controlled live test, the API confirmed a scheduled item that the operator could not see in the scheduling interface. After the scheduled time, both API readback and the operator confirmed publication. Routine production use remains blocked pending batch-wide preflight and verification.',
     ],
   },
   {
@@ -52,9 +52,9 @@ const sections = [
   description="A modular Python publishing application with transactional SQLite state, validated packages, a Meta Graph API adapter and explicit recovery workflows."
   canonical="https://isentor.github.io/projects/content-publishing-automation/"
   category="SOFTWARE & AUTOMATION"
-  headline="Reliable state, not just a schedule."
+  headline="Recovering safely when a publishing request has an uncertain result."
   lead="A publishing workflow built around validated packages, persistent intent and verification of external results."
   stack="Python · SQLite · REST APIs · Scheduling · Contract Testing"
-  status="Core implemented; credential management in development; production readiness not claimed."
+  status="Offline checks and one controlled live test. Routine production use remains blocked."
   {sections}
 />

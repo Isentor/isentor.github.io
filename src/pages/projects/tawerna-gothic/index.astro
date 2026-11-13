@@ -202,18 +202,41 @@ import '../../../styles/case-study.css';
     <section class="cs-section cs-section-neutral light-section" data-progress-update aria-labelledby="publishing-progress-heading">
       <div class="container cs-two-column">
         <article>
-          <span class="micro-label">LOCAL IMPLEMENTATION</span>
-          <h2 id="publishing-progress-heading">Publishing Integration in Development</h2>
+          <span class="micro-label">WORDPRESS PUBLISHING</span>
+          <h2 id="publishing-progress-heading">Verify Each Change After Writing</h2>
           <p>A Python package builder and custom WordPress REST integration prepare structured Gutenberg content, validate media and compare the resulting state with the intended package.</p>
           <p>The implementation separates package identity, execution and readback, with safeguards against conflicting retries and duplicate media operations.</p>
           <p>I revised the retry workflow after the original procedure required too much manual handling. The revised process keeps the same operation identity, prevents concurrent writers and checks the current WordPress state before continuing. This makes retries easier to operate while retaining checks against repeated writes after an uncertain response.</p>
         </article>
         <article>
-          <span class="micro-label">STATUS / OCTOBER 2026</span>
-          <h3>Implemented locally, not deployed</h3>
-          <p>Local unit and integration checks have exercised the implementation. Final regression verification is still incomplete, with review and release acceptance remaining before production deployment.</p>
-          <p>This is a separate development milestone from the already running public website. Local checks are not presented as proof of production publishing.</p>
+          <span class="micro-label">STATUS / NOVEMBER 2026</span>
+          <h3>Draft creation and live edits verified</h3>
+          <p>A November production run created and verified two WordPress drafts with eight illustrations. A separate workflow updated three published articles with illustrations, checked the resulting content and preserved the featured images and unrelated embeds.</p>
+          <p>Each write has a specific approval. The regression record still includes outstanding transport test failures and an older WordPress runtime that has not been verified.</p>
         </article>
+      </div>
+    </section>
+
+    <section class="cs-section light-section" data-progress-update aria-labelledby="public-tools-heading">
+      <div class="container">
+        <div class="cs-section-heading">
+          <span class="micro-label">PUBLIC TOOLS / NOVEMBER 2026</span>
+          <h2 id="public-tools-heading">Two Tools for Gothic Remake Players</h2>
+        </div>
+        <div class="cs-two-column">
+          <article>
+            <h3>Interactive Map</h3>
+            <p>A Leaflet map with 3,870 records across the main map and five submaps. Players can filter points, search for locations and share links to individual markers.</p>
+            <p>The build checks the input files and limits which fields reach the public dataset. A separate pipeline monitors changes in selected ModKit files for manual review. I checked location clues in the game, and the map marks clues whose locations are approximate.</p>
+            <p><a href="https://interactivemap.tawerna-gothic.pl/">Open the interactive map</a></p>
+          </article>
+          <article>
+            <h3>Lockpicker</h3>
+            <p>A browser interface for entering lock clues, replaying a result and sharing the setup. The calculation runs locally in a Web Worker using a solver by Kamil Cieślik, released under the MIT License.</p>
+            <p>The release was checked with Node tests and desktop and mobile browser checks. I uploaded the tool and verified the deployment with a separate live check.</p>
+            <p><a href="https://lockpicker.tawerna-gothic.pl/">Try Lockpicker</a></p>
+          </article>
+        </div>
       </div>
     </section>
 

@@ -27,9 +27,9 @@ export const projects: Project[] = [
     name: 'Tawerna Gothic',
     category: 'WEB PLATFORM',
     description:
-      'A long-running gaming platform combining a custom WordPress website with human-led editorial workflows and AI-assisted orchestration.',
+      'A gaming platform I started in 2005, now running on a custom WordPress site with an interactive map and a browser-based lockpicking tool.',
     details:
-      'I own the product direction and information architecture, develop the platform and coordinate research, content and QA. A new publishing integration is locally implemented and still under regression verification.',
+      'I own the product direction and information architecture. Recent work includes verifying live article updates and testing the data and browser behavior behind two public tools.',
     technologies: ['WordPress', 'PHP', 'Python', 'Workflow Orchestration'],
     visualType: 'web',
     image: '/projects/tawerna-gothic/homepage-desktop.webp',
@@ -47,9 +47,11 @@ export const projects: Project[] = [
     description:
       'A staged WordPress rebuild with a custom article model, validated content migration, legacy URL normalization and a responsive child theme.',
     details:
-      'The frontend foundation is deployed and verified. A new editorial homepage is a locally verified release candidate, not yet deployed.',
+      'The editorial homepage, search, hubs and article templates are live. The rollout included route checks and a separate release for search and social metadata.',
     technologies: ['WordPress', 'PHP', 'Content Modelling', 'Migration Validation'],
     visualType: 'architecture',
+    liveUrl: 'https://grytycy.pl/',
+    liveLabel: 'Visit live site',
     caseStudyUrl: '/projects/grytycy/',
     caseStudyLabel: 'View case study',
   },
@@ -59,7 +61,7 @@ export const projects: Project[] = [
     description:
       'A modular Python publishing application with transactional SQLite state, validated content packages and a Meta Graph API adapter.',
     details:
-      'Implemented recovery and reconciliation workflows handle interrupted operations and uncertain external results. Unrestricted production operation is not claimed; credential management remains in development.',
+      'The workflow records intent before an API request and checks what happened before any retry. One controlled test confirmed public delivery. Routine production use remains blocked.',
     technologies: ['Python', 'SQLite', 'REST APIs', 'Recovery', 'Contract Testing'],
     visualType: 'automation',
     caseStudyUrl: '/projects/content-publishing-automation/',
@@ -76,7 +78,7 @@ export interface ExpertiseArea {
 export const expertiseAreas: ExpertiseArea[] = [
   {
     title: 'Software & Automation',
-    summary: 'Python tools and system integrations with persistent state, validated inputs and recovery paths for interrupted operations.',
+    summary: 'Python tools that validate publishing packages, persist intent and reconcile incomplete operations against API readback.',
     skills: ['Python applications', 'Workflow orchestration', 'SQLite transactions', 'REST APIs', 'Scheduling', 'Data integrity', 'Recovery workflows', 'Integration and contract testing'],
   },
   {
@@ -121,6 +123,6 @@ export const experienceItems: ExperienceItem[] = [
   {
     period: 'Current Focus',
     title: 'Web Development & Automation',
-    description: 'Developing web platforms, automation tools and system integrations, with a focus on data integrity, diagnostics, testing and controlled releases.',
+    description: 'Releasing WordPress changes in stages, verifying browser tools and improving how publishing integrations handle incomplete responses.',
   },
 ];
