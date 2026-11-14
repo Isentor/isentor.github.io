@@ -11,7 +11,7 @@ const { items } = Astro.props;
 <div class="cs-gallery">
   {items.map((item) => (
     <figure class:list={['cs-gallery-item', { 'cs-gallery-item-mobile': item.mobile }]}>
-      <div class="cs-gallery-image">
+      <div class="media-frame">
         <img
           src={item.src}
           alt={item.alt}
@@ -21,7 +21,7 @@ const { items } = Astro.props;
           decoding="async"
         />
       </div>
-      <figcaption>{item.caption}</figcaption>
+      <figcaption class="media-caption">{item.caption}</figcaption>
     </figure>
   ))}
 </div>

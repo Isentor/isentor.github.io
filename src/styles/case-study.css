@@ -115,22 +115,6 @@
   position: relative;
 }
 
-.case-study-page .cs-browser-frame {
-  overflow: hidden;
-  border: 1px solid var(--line-dark);
-  background: var(--dark-soft);
-  box-shadow: var(--shadow);
-  border-radius: .4rem;
-  margin: 0;
-  padding: .7rem;
-}
-
-.case-study-page .cs-browser-frame img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
 .case-study-page .cs-section {
   padding-block: var(--section-space);
 }
@@ -710,25 +694,9 @@
   grid-column: span 8;
 }
 
-.case-study-page .cs-gallery-image {
-  overflow: hidden;
-  border: 1px solid var(--line-light);
-  background: var(--light-soft);
-  border-radius: .3rem;
-  box-shadow: var(--shadow);
-}
-
-.case-study-page .cs-gallery-image img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
 .case-study-page .cs-gallery-item figcaption {
   max-width: 700px;
-  padding-top: 0.9rem;
   color: var(--muted-dark);
-  font-size: 0.82rem;
 }
 
 .case-study-page .cs-lessons-section {
@@ -791,7 +759,6 @@
 .case-study-page .cs-hero-evidence figcaption {
   padding: .6rem .25rem 0;
   color: var(--soft-light);
-  font-size: .86rem;
 }
 
 .case-study-page .cs-focused-section .cs-foundation-layout {
